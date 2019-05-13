@@ -374,17 +374,11 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             return Ok();
         }
 
-        //For Web API controller
-        // Send an email with this link.
-        //string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-        //var callbackUrl = Url.Link("Default", new { Controller = "Account", Action = "ResetPassword", code = code });
-
-
-        // GET api/Account/SendResetPasswordLink
+        // GET api/Account/ResetPasswordLink
         [HttpGet]
         [AllowAnonymous] // Because the user isn't logged in to reset their password.
-        [Route("SendResetPasswordLink")]
-        public IHttpActionResult SendResetPasswordLink(SendResetPasswordLinkBindingModel passwordResetModel)
+        [Route("SendResetPassword")]
+        public IHttpActionResult SendResetPassword(SendResetPasswordBindingModel passwordResetModel)
         {
             // If authenticated properly, return a link for the user to click to reset their password.
             // Currently the link doesn't goto a view, so in order to test it, we use the data from the link,
@@ -406,6 +400,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
                     <h2>Link to reset your password.</h2>
                     <p>If you didn't send this link, we reccomend you contact support immediately at 1-204-123-4567 or email us a 'wereFake@fake.ca'.</p>
                     <a href='{callbackUrl}'>{callbackUrl}</a>
+                    <p>Reset Token: ' {resetToken} '</p>
                 </div>
             ","Reset your password - BudgetManager");
 
@@ -413,18 +408,18 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         }
 
         // GET api/Account/ResetPassword
-        [HttpGet]
-        [AllowAnonymous] // Because the user isn't logged in to reset their password.
-        [Route("ResetPassword")]
-        public IHttpActionResult ResetPassword(string token)
-        {
-            // If the token generated is proper, send the user to the reset password view,
-            // in this case not doing that so just return ok varifying the token is okay.
-            if (String.IsNullOrEmpty(token))
-                return InternalServerError();
-            else
-                return Ok(); // Technically returning a view here..
-        }
+        //[HttpGet]
+        //[AllowAnonymous] // Because the user isn't logged in to reset their password.
+        //[Route("ResetPassword")]
+        //public IHttpActionResult ResetPassword(string token)
+        //{
+        //    // If the token generated is proper, send the user to the reset password view,
+        //    // in this case not doing that so just return ok varifying the token is okay.
+        //    if (String.IsNullOrEmpty(token))
+        //        return InternalServerError();
+        //    else
+        //        return Ok(); // Technically returning a view here..
+        //}
 
         [HttpPost]
         [AllowAnonymous]

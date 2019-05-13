@@ -102,7 +102,7 @@ namespace SD220_Deliverable_1_DGrouette.Models
         public string Token { get; set; } // I prefer token over code... 
     }
 
-    public class SendResetPasswordLinkBindingModel
+    public class SendResetPasswordBindingModel
     {
         [Required]
         [Display(Name = "Email")]
