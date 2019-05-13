@@ -3,6 +3,11 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Additional files to ignore 
+private.config
+Upload/
+
+
 # User-specific files
 *.rsuser
 *.suo
