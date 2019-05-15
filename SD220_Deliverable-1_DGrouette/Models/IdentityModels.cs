@@ -1,8 +1,12 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using SD220_Deliverable_1_DGrouette.Models.Domain;
 
 namespace SD220_Deliverable_1_DGrouette.Models
 {
@@ -16,6 +20,21 @@ namespace SD220_Deliverable_1_DGrouette.Models
             // Add custom user claims here
             return userIdentity;
         }
+        [InverseProperty(nameof(Household.Creator))]
+        public virtual List<Household> CreatedHouseholds { get; set; }
+
+        [InverseProperty(nameof(Household.Users))]
+        public virtual List<Household> Households { get; set; }
+
+        [InverseProperty(nameof(Household.InvitedUsers))]
+        public virtual List<Household> HouseholdsInvitedTo { get; set; }
+
+        public ApplicationUser()
+        {
+            Households = new List<Household>();
+            CreatedHouseholds = new List<Household>();
+            HouseholdsInvitedTo = new List<Household>();
+        }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -24,7 +43,10 @@ namespace SD220_Deliverable_1_DGrouette.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-        
+
+        public DbSet<Household> Households { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

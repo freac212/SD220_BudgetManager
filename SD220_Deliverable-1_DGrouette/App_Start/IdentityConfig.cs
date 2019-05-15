@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using SD220_Deliverable_1_DGrouette.Models;
+using SD220_Deliverable_1_DGrouette.Models.Domain;
 
 namespace SD220_Deliverable_1_DGrouette
 {

@@ -206,7 +206,14 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Models\Bindings\CategoryBindingModel.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Models\Bindings\InviteHouseholdBindingModel.cs" />
+    <Compile Include="Models\Domain\Category.cs" />
+    <Compile Include="Models\Filters\CategoryAuthorizationAttribute.cs" />
+    <Compile Include="Models\Filters\CreatorAuthorizationAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HouseholdController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -214,7 +221,13 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Bindings\HouseholdBindingModel.cs" />
+    <Compile Include="Models\Domain\Household.cs" />
+    <Compile Include="Models\Helpers\HouseholdHelpers.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Views\HouseholdUserViewModel.cs" />
+    <Compile Include="Models\Views\CategoryViewModel.cs" />
+    <Compile Include="Models\Views\HouseholdViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -279,7 +292,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Domain\" />
+    <Folder Include="Views\Household\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

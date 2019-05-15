@@ -424,7 +424,6 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("ResetPassword")]
-        [System.Web.Mvc.ValidateAntiForgeryToken]
         public IHttpActionResult ResetPassword(ResetPasswordBindingModel passwordBindingModel)
         {
             // Where we take in the new data to set the new password for the user.
@@ -440,7 +439,18 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             if (result.Succeeded)
                 return Ok("Password has been reset.");
             else
-                return InternalServerError(); // What kind of error should I send here? And should I send the errors?
+            {
+                AddErrors(result);
+                return BadRequest(ModelState);
+            }
+        }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
         }
 
         protected override void Dispose(bool disposing)
