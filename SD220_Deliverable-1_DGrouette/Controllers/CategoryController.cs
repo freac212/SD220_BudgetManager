@@ -52,7 +52,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
 
             return Created(Url.Link(
                 "GetCategoryById",
-                new { household.Id }),
+                new { category.Id }),
                 categoryView
             );
         }

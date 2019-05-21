@@ -46,6 +46,7 @@ namespace SD220_Deliverable_1_DGrouette.Models
 
         public DbSet<Household> Households { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<BankAccount> BankAccounts { get; set; }
 
         public static ApplicationDbContext Create()
         {

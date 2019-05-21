@@ -206,9 +206,12 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Models\Bindings\BankAccountBindingModel.cs" />
+    <Compile Include="Controllers\BankAccountController.cs" />
     <Compile Include="Models\Bindings\CategoryBindingModel.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Models\Bindings\InviteHouseholdBindingModel.cs" />
+    <Compile Include="Models\Domain\BankAccount.cs" />
     <Compile Include="Models\Domain\Category.cs" />
     <Compile Include="Models\Filters\CategoryAuthorizationAttribute.cs" />
     <Compile Include="Models\Filters\CreatorAuthorizationAttribute.cs" />
@@ -223,8 +226,10 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Bindings\HouseholdBindingModel.cs" />
     <Compile Include="Models\Domain\Household.cs" />
+    <Compile Include="Models\Helpers\BankAccountHelpers.cs" />
     <Compile Include="Models\Helpers\HouseholdHelpers.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Views\BankAccountViewModel.cs" />
     <Compile Include="Models\Views\HouseholdUserViewModel.cs" />
     <Compile Include="Models\Views\CategoryViewModel.cs" />
     <Compile Include="Models\Views\HouseholdViewModel.cs" />

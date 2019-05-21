@@ -23,7 +23,6 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // Using the same DB instance
         private ApplicationUserManager UserManager => ControllerContext.Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
         public ApplicationDbContext DbContext => ControllerContext.Request.GetOwinContext().Get<ApplicationDbContext>();
-
         //public RoleManager<IdentityRole> RoleManager => new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(DbContext));
 
         // >Registered Users Can Create inf households
