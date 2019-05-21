@@ -17,7 +17,7 @@ using System.Web.Http;
 namespace SD220_Deliverable_1_DGrouette.Controllers
 {
     [RoutePrefix("api/household")]
-    [Authorize] // i.e only registered users.
+    [Authorize]
     public class HouseholdController : ApiController
     {
         // Using the same DB instance
@@ -25,12 +25,6 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         public ApplicationDbContext DbContext => ControllerContext.Request.GetOwinContext().Get<ApplicationDbContext>();
 
         //public RoleManager<IdentityRole> RoleManager => new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(DbContext));
-
-        //private ApplicationDbContext DbContext { get; set; }
-        //public HouseholdController()
-        //{
-        //    DbContext = new ApplicationDbContext();
-        //}
 
         // >Registered Users Can Create inf households
         // POST api/household/create
@@ -81,7 +75,6 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             if (!ModelState.IsValid) // ++Q : Turn into filter.
                 return BadRequest(ModelState);
 
-            //var user = UserManager.FindById(User.Identity.GetUserId());
             var household = DbContext.Households.FirstOrDefault(p => p.Id == id);
 
             if (household is null)
@@ -128,10 +121,8 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             household.InvitedUsers.Add(user);
             DbContext.SaveChanges();
 
-            // if so, generate an api link for them to add themselves to the household
             var callbackUrl = Url.Link("Default", new { Controller = "Household", Action = "Join", id = household.Id });
 
-            // Email said link to them
             var emailService = new EmailService();
             emailService.Send(user.Email, $@"
                     <div>

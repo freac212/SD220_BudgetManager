@@ -15,7 +15,7 @@ using System.Web.Http;
 namespace SD220_Deliverable_1_DGrouette.Controllers
 {
     [RoutePrefix("api/category")]
-    [Authorize] // i.e only registered users.
+    [Authorize]
     public class CategoryController : ApiController
     {
         // Using the same DB instance
@@ -99,6 +99,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
                 return InternalServerError();
             }
         }
+
         // >Registered users should be able to view a list of all categories from the households they are in.
         // GET api/category/getall
         [HttpGet]
@@ -120,7 +121,6 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
 
 
         // === Extras for debugging. ===
-
         // GET api/category/getbyid/2
         [HttpGet]
         [Route("getbyid/{id:int}", Name = "GetCategoryById")]
