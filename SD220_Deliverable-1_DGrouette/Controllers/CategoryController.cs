@@ -26,14 +26,14 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // POST api/category/create
         [HttpPost]
         [Route("create/{id:int}")]
-        [CreatorAuthorization]
-        public IHttpActionResult Create(int? id, CategoryBindingModel categoryBinding)
+        [UserAuthorization(IdType = typeof(HouseholdCreator))]
+        public IHttpActionResult Create(int? Id, CategoryBindingModel categoryBinding)
         {
-            // Id being the id of the Household
-            if (!ModelState.IsValid)
+            // Id being the Id of the Household
+            if (ModelState is null || !ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var household = DbContext.Households.FirstOrDefault(p => p.Id == id);
+            var household = DbContext.Households.FirstOrDefault(p => p.Id == Id);
             if (household is null)
                 return NotFound();
 
@@ -61,13 +61,13 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // POST api/category/edit/2
         [HttpPost]
         [Route("edit/{id:int}")]
-        [CategoryAuthorization]
-        public IHttpActionResult Edit(int? id, CategoryBindingModel categoryBinding)
+        [UserAuthorization(IdType = typeof(CategoryCreator))]
+        public IHttpActionResult Edit(int? Id, CategoryBindingModel categoryBinding)
         {
-            if (!ModelState.IsValid) // ++Q : Turn into filter.
+            if (ModelState is null || !ModelState.IsValid) // ++Q : Turn into filter.
                 return BadRequest(ModelState);
 
-            var category = DbContext.Categories.FirstOrDefault(p => p.Id == id);
+            var category = DbContext.Categories.FirstOrDefault(p => p.Id == Id);
             if (category is null)
                 return NotFound();
 
@@ -84,10 +84,10 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // POST api/category/delete/2
         [HttpDelete]
         [Route("delete/{id:int}")]
-        [CategoryAuthorization]
-        public IHttpActionResult Delete(int? id)
+        [UserAuthorization(IdType = typeof(CategoryCreator))]
+        public IHttpActionResult Delete(int? Id)
         {
-            var removedCategory = DbContext.Categories.Remove(DbContext.Categories.FirstOrDefault(p => p.Id == id));
+            var removedCategory = DbContext.Categories.Remove(DbContext.Categories.FirstOrDefault(p => p.Id == Id));
 
             if (removedCategory != null)
             {
@@ -110,7 +110,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             if (userId is null)
                 return NotFound();
 
-            var categories = DbContext.Categories.Where(p => p.Household.Users.Any(i => i.Id == userId)).ToList();
+            var categories = DbContext.Categories.Where(p => p.Household.Members.Any(i => i.Id == userId)).ToList();
             if (categories is null)
                 return NotFound();
 
@@ -119,11 +119,10 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             return Ok(categoriesView);
         }
 
-
         // === Extras for debugging. ===
-        // GET api/category/getbyid/2
+        // GET api/category/getbyId/2
         [HttpGet]
-        [Route("getbyid/{id:int}", Name = "GetCategoryById")]
+        [Route("getbyId/{id:int}", Name = "GetCategoryById")]
         public IHttpActionResult GetById(int? Id)
         {
             if (Id is null)

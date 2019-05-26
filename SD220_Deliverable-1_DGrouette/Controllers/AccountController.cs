@@ -61,6 +61,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
 
             return new UserInfoViewModel
             {
+                Id = User.Identity.GetUserId(),
                 Email = User.Identity.GetUserName(),
                 HasRegistered = externalLogin == null,
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
@@ -119,14 +120,14 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState is null || !ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -139,7 +140,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         [Route("SetPassword")]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState is null || !ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -158,7 +159,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         [Route("AddExternalLogin")]
         public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState is null || !ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -196,7 +197,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         [Route("RemoveLogin")]
         public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState is null || !ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -259,9 +260,9 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             if (hasRegistered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    OAuthDefaults.AuthenticationType);
+
+                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                   OAuthDefaults.AuthenticationType);
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
@@ -324,7 +325,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState is null || !ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -338,7 +339,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
                 return GetErrorResult(result);
             }
 
-            return Ok();
+            return Ok(new { email = user.Email });
         }
 
         // POST api/Account/RegisterExternal
@@ -347,7 +348,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         [Route("RegisterExternal")]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState is null || !ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -369,7 +370,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             result = await UserManager.AddLoginAsync(user.Id, info.Login);
             if (!result.Succeeded)
             {
-                return GetErrorResult(result); 
+                return GetErrorResult(result);
             }
             return Ok();
         }
@@ -387,7 +388,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             var user = UserManager.FindByEmail(passwordResetModel.Email);
 
             if (user is null)
-                return Ok("If that email exists, we've send it a reset password link.");                
+                return Ok("If that email exists, we've send it a reset password link.");
 
             string resetToken = UserManager.GeneratePasswordResetTokenAsync(user.Id).Result;
             var callbackUrl = Url.Link("Default", new { Controller = "Account", Action = "ResetPassword", token = resetToken });
@@ -402,7 +403,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
                     <a href='{callbackUrl}'>{callbackUrl}</a>
                     <p>Reset Token: ' {resetToken} '</p>
                 </div>
-            ","Reset your password - BudgetManager");
+            ", "Reset your password - BudgetManager");
 
             return Ok("If that email exists, we've send it a reset password link.");
         }
@@ -427,7 +428,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         public IHttpActionResult ResetPassword(ResetPasswordBindingModel passwordBindingModel)
         {
             // Where we take in the new data to set the new password for the user.
-            if(!ModelState.IsValid)
+            if (ModelState is null || !ModelState.IsValid)
                 return BadRequest(ModelState);
 
             var user = UserManager.FindByEmail(passwordBindingModel.Email);

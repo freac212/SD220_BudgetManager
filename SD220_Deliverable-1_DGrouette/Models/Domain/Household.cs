@@ -16,14 +16,14 @@ namespace SD220_Deliverable_1_DGrouette.Models.Domain
         public virtual ApplicationUser Creator { get; set; }
         public string CreatorId { get; set; }
 
-        public virtual List<ApplicationUser> Users { get; set; }
+        public virtual List<ApplicationUser> Members { get; set; }
         public virtual List<ApplicationUser> InvitedUsers { get; set; }
         public virtual List<Category> Categories { get; set; }
         public virtual List<BankAccount> BankAccounts { get; set; } // A bank account can only exist on one household, but a household can have many accounts
 
         public Household()
         {
-            Users = new List<ApplicationUser>();
+            Members = new List<ApplicationUser>();
             InvitedUsers = new List<ApplicationUser>();
             Categories = new List<Category>();
             BankAccounts = new List<BankAccount>();

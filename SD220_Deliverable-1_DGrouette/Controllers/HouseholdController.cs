@@ -31,7 +31,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         [Route("create")]
         public IHttpActionResult Create(HouseholdBindingModel householdBinding)
         {
-            if (!ModelState.IsValid)
+            if (ModelState is null || !ModelState.IsValid)
                 return BadRequest(ModelState);
 
             var user = UserManager.FindById(User.Identity.GetUserId());
@@ -43,7 +43,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
                 Name = householdBinding.Name,
                 Description = householdBinding.Description,
                 Creator = user,
-                Users = new List<ApplicationUser>()
+                Members = new List<ApplicationUser>()
                 {
                     user // adding the user so they show up in the user list on requests
                 }
@@ -65,16 +65,16 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // POST api/household/edit/2
         [HttpPost]
         [Route("edit/{id:int}")]
-        [CreatorAuthorization]
-        public IHttpActionResult Edit(int? id, HouseholdBindingModel householdBinding)
+        [UserAuthorization(IdType = typeof(HouseholdCreator))]
+        public IHttpActionResult Edit(int? Id, HouseholdBindingModel householdBinding)
         {
             // Two strings so that you can edit only one string? or you have to edit both?
             // Asking here because I can use required tags on the bindingModel
 
-            if (!ModelState.IsValid) // ++Q : Turn into filter.
+            if (ModelState is null || !ModelState.IsValid) // ++Q : Turn into filter.
                 return BadRequest(ModelState);
 
-            var household = DbContext.Households.FirstOrDefault(p => p.Id == id);
+            var household = DbContext.Households.FirstOrDefault(p => p.Id == Id);
 
             if (household is null)
                 return NotFound();
@@ -93,8 +93,8 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // POST api/household/invite
         [HttpPost]
         [Route("invite/{id:int}")]
-        [CreatorAuthorization]
-        public IHttpActionResult Invite(int? id, InviteHouseholdBindingModel bindingModel)
+        [UserAuthorization(IdType = typeof(HouseholdCreator))]
+        public IHttpActionResult Invite(int? Id, InviteHouseholdBindingModel bindingModel)
         {
             // Invited user must be registered in the app
             // api takes an email and sends a link to that email.
@@ -103,27 +103,30 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             if (String.IsNullOrEmpty(bindingModel.Email))
                 return BadRequest();
 
-            var user = UserManager.FindByEmail(bindingModel.Email);
-            if (user is null)
+            var Inviteduser = UserManager.FindByEmail(bindingModel.Email);
+            if (Inviteduser is null)
                 return NotFound();
 
-            var household = DbContext.Households.FirstOrDefault(p => p.Id == id);
+            var household = DbContext.Households.FirstOrDefault(p => p.Id == Id);
             if (household is null)
                 return NotFound();
 
-                        if (household.CreatorId == user.Id)
+            if (household.CreatorId == Inviteduser.Id)
                 return BadRequest("Cannot invite Household creator.");
 
-            if (household.InvitedUsers.Any(p => p.Id == user.Id))
+            if (household.InvitedUsers.Any(p => p.Id == Inviteduser.Id))
                 return BadRequest("User is already invited.");
 
-            household.InvitedUsers.Add(user);
+            if (household.Members.Any(p => p.Id == Inviteduser.Id))
+                return BadRequest("User is already in the household.");
+
+            household.InvitedUsers.Add(Inviteduser);
             DbContext.SaveChanges();
 
-            var callbackUrl = Url.Link("Default", new { Controller = "Household", Action = "Join", id = household.Id });
+            var callbackUrl = Url.Link("Default", new { Controller = "Household", Action = "Join", Id = household.Id });
 
             var emailService = new EmailService();
-            emailService.Send(user.Email, $@"
+            emailService.Send(Inviteduser.Email, $@"
                     <div>
                         <h2>Link to join '{household.Name}' Household</h2>
                         <p>Invited by {household.Creator.Email}</p>
@@ -139,10 +142,10 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // GET api/household/join
         [HttpGet]
         [Route("join/{id:int}")]
-        public IHttpActionResult Join(int id)
+        public IHttpActionResult Join(int Id)
         {
             // Check to see if the user making this request in the on the household and flagged as invited.
-            var household = DbContext.Households.FirstOrDefault(p => p.Id == id);
+            var household = DbContext.Households.FirstOrDefault(p => p.Id == Id);
             if (household is null)
                 return NotFound();
 
@@ -155,7 +158,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             if (household.InvitedUsers.Any(p => p.Id == user.Id))
             {
                 household.InvitedUsers.Remove(user);
-                household.Users.Add(user);
+                household.Members.Add(user);
                 DbContext.SaveChanges();
 
                 return Ok();
@@ -170,10 +173,11 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // DELETE api/household/1
         [HttpDelete]
         [Route("delete/{id:int}")] // Not required but might aswell
-        [CreatorAuthorization]
-        public IHttpActionResult Delete(int? id)
+        [UserAuthorization(IdType = typeof(HouseholdCreator))]
+        public IHttpActionResult Delete(int? Id)
         {
-            var removedHousehold = DbContext.Households.Remove(DbContext.Households.FirstOrDefault(p => p.Id == id));
+            // Inorder to avoid getting the error for cascade deleting, we need to change something in the onModelCreating, adding .WillCascadeOnDelete(false);
+            var removedHousehold = DbContext.Households.Remove(DbContext.Households.FirstOrDefault(p => p.Id == Id));
 
             if (removedHousehold != null)
             {
@@ -186,13 +190,13 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             }
         }
 
-        // >List users for a household
+        // > Registered users can list users of a household
         // GET api/household/4/listusers
         [HttpGet]
         [Route("getallusers/{id:int}")]
-        public IHttpActionResult GetAllUsers(int? id)
+        public IHttpActionResult GetAllUsers(int? Id)
         {
-            var householdUsers = DbContext.Households.FirstOrDefault(p => p.Id == id).Users;
+            var householdUsers = DbContext.Households.FirstOrDefault(p => p.Id == Id).Members;
             if (householdUsers is null)
                 return NotFound();
 
@@ -212,7 +216,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         [Route("user")]
         public IHttpActionResult GetAllUserHouseholds()
         {
-            var userHouseholds = UserManager.FindById(User.Identity.GetUserId()).Households;
+            var userHouseholds = UserManager.FindById(User.Identity.GetUserId()).HouseholdMembers;
             if (userHouseholds is null)
                 return NotFound();
 
@@ -225,20 +229,20 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // GET api/household/2/leave
         [HttpGet]
         [Route("leave/{id:int}")]
-        public IHttpActionResult Leave(int? id)
+        public IHttpActionResult Leave(int? Id)
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
             if (user is null)
                 return NotFound();
 
-            var household = DbContext.Households.FirstOrDefault(p => p.Id == id);
+            var household = DbContext.Households.FirstOrDefault(p => p.Id == Id);
             if (household is null)
                 return NotFound();
 
             // If user is in the household and is not the creator, allow them to leave.
-            if (household.Users.Any(p => p.Id == user.Id && household.Creator.Id != user.Id))
+            if (household.Members.Any(p => p.Id == user.Id && household.Creator.Id != user.Id))
             {
-                household.Users.Remove(user);
+                household.Members.Remove(user);
                 DbContext.SaveChanges();
                 return Ok();
             }

@@ -19,14 +19,31 @@ namespace SD220_Deliverable_1_DGrouette.Models.Domain
         public virtual Household Household { get; set; }
         public int HouseholdId { get; set; }
 
-        public void UpdateBalance()
+        public virtual List<Transaction> Transactions { get; set; }
+
+        public BankAccount()
         {
-            // Get all transactions and set the balance from them
+            Transactions = new List<Transaction>();
         }
 
-        //public decimal AddTransaction(decimal transactionValue)
-        //{
-        //    return Balance += transactionValue;
-        //}
+        public void CalculateBalance()
+        {
+            Balance = Transactions.Where(p => !p.isVoid).Sum(p => p.Amount);
+        }
+
+        public void AddTransaction(Transaction transaction)
+        {
+            Transactions.Add(transaction);
+
+            if(!transaction.isVoid)
+                Balance += transaction.Amount;
+        }
+        public void RemoveTransaction(Transaction transaction)
+        {
+            Transactions.Remove(transaction);
+
+            if (!transaction.isVoid)
+                Balance -= transaction.Amount;
+        }
     }
 }

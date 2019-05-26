@@ -19,7 +19,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Helpers
                 Name = household.Name,
                 Description = household.Description,
                 Creator = household.Creator.Email,
-                HouseholdUsers = household.Users.Select(p => new HouseholdUserViewModel()
+                HouseholdUsers = household.Members.Select(p => new HouseholdUserViewModel()
                 {
                     Id = p.Id,
                     Email = p.Email,
@@ -48,6 +48,14 @@ namespace SD220_Deliverable_1_DGrouette.Models.Helpers
                 Description = category.Description,
                 HouseholdId = category.HouseholdId
             };
+        }
+
+        internal enum ListTypes
+        {
+            HouseHolds,
+            Transactions,
+            BankAccounts,
+            Categories
         }
     }
 }

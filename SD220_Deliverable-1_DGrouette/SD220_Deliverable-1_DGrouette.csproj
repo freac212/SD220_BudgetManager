@@ -206,6 +206,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Models\Filters\UserAuthorizationAttribute.cs" />
+    <Compile Include="Models\Filters\_OwnerCreatorAuthorization.cs" />
+    <Compile Include="Models\Bindings\TransactionBindingModel.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Models\Bindings\BankAccountBindingModel.cs" />
     <Compile Include="Controllers\BankAccountController.cs" />
     <Compile Include="Models\Bindings\CategoryBindingModel.cs" />
@@ -213,8 +217,10 @@
     <Compile Include="Models\Bindings\InviteHouseholdBindingModel.cs" />
     <Compile Include="Models\Domain\BankAccount.cs" />
     <Compile Include="Models\Domain\Category.cs" />
-    <Compile Include="Models\Filters\CategoryAuthorizationAttribute.cs" />
-    <Compile Include="Models\Filters\CreatorAuthorizationAttribute.cs" />
+    <Compile Include="Models\Domain\Transaction.cs" />
+    <Compile Include="Models\Filters\_HouseholdUserAuthorizationAttribute.cs" />
+    <Compile Include="Models\Filters\_OwnerAuthorizationAttribute.cs" />
+    <Compile Include="Models\Filters\_CreatorAuthorizationAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HouseholdController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -227,8 +233,12 @@
     <Compile Include="Models\Bindings\HouseholdBindingModel.cs" />
     <Compile Include="Models\Domain\Household.cs" />
     <Compile Include="Models\Helpers\BankAccountHelpers.cs" />
+    <Compile Include="Models\Helpers\CategoryHelpers.cs" />
     <Compile Include="Models\Helpers\HouseholdHelpers.cs" />
+    <Compile Include="Models\Helpers\ITypeFilterHelper.cs" />
+    <Compile Include="Models\Helpers\TransactionHelpers.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Views\TransactionViewModel.cs" />
     <Compile Include="Models\Views\BankAccountViewModel.cs" />
     <Compile Include="Models\Views\HouseholdUserViewModel.cs" />
     <Compile Include="Models\Views\CategoryViewModel.cs" />

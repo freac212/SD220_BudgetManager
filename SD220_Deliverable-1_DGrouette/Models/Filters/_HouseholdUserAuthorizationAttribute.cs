@@ -8,33 +8,40 @@ using System.Web.Http.Filters;
 using System.Web.Http;
 using System.Net.Http;
 using System.Net;
+using SD220_Deliverable_1_DGrouette.Models.Helpers;
 
 namespace SD220_Deliverable_1_DGrouette.Models.Filters
 {
-    internal class CategoryAuthorizationAttribute : ActionFilterAttribute // Make sure not using MVC namespace for actionFilters, atleast in Web APIS
+
+
+    internal class _HouseholdUserAuthorizationAttribute : ActionFilterAttribute // Make sure not using MVC namespace for actionFilters, atleast in Web APIS
     {
         private ApplicationUserManager UserManager => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
         public ApplicationDbContext DbContext => HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>();
 
 
-        // Check if the user is the owner of the Household.
+        public Type IdType { get; set; }
+
+        public _HouseholdUserAuthorizationAttribute(Type idType = null)
+        {
+            IdType = idType;
+        }
+
+        // Check if the user is the owner of the Household or the creator of the object
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             base.OnActionExecuting(actionContext);
 
-            var userId = actionContext.RequestContext.Principal.Identity.GetUserId(); // Better because not bringing entire user
-            var catId = actionContext.RequestContext.RouteData.Values["id"].ToString(); // Id is of the category
+            var userId = actionContext.RequestContext.Principal.Identity.GetUserId();
+            var id = actionContext.RequestContext.RouteData.Values["id"].ToString();
 
-            if (!int.TryParse(catId, out int categoryId))
+            if (!int.TryParse(id, out int objectId))
                 actionContext.Response = new HttpResponseMessage(HttpStatusCode.NotFound);
 
-            // If the categories household's creator is the users id, continue
-            var userIsCreator = DbContext.Categories.Any(p => p.Household.CreatorId == userId && p.Id == categoryId);
+            ITypeFilterHelper domainClass = (ITypeFilterHelper)Activator.CreateInstance(IdType);
 
-            if (!userIsCreator)
+            if (!domainClass.Execute(objectId, userId))
                 actionContext.Response = new HttpResponseMessage(HttpStatusCode.NotFound);
-
-            // Check if creator of household obeject is the user trying to access this object.
         }
     }
 }

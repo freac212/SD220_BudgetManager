@@ -16,6 +16,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Helpers
                 Id = bankAccount.Id,
                 Name = bankAccount.Name,
                 Description = bankAccount.Description,
+                Balance = bankAccount.Balance,
                 DateCreated = bankAccount.DateCreated,
                 DateUpdated = bankAccount.DateUpdated,
                 HouseholdId = bankAccount.HouseholdId

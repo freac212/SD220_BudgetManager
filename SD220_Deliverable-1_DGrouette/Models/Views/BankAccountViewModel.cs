@@ -9,6 +9,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Views
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public decimal Balance { get; set; }
         public string Description { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateUpdated { get; set; }

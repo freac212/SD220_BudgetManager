@@ -23,17 +23,19 @@ namespace SD220_Deliverable_1_DGrouette.Models
         [InverseProperty(nameof(Household.Creator))]
         public virtual List<Household> CreatedHouseholds { get; set; }
 
-        [InverseProperty(nameof(Household.Users))]
-        public virtual List<Household> Households { get; set; }
+        [InverseProperty(nameof(Household.Members))]
+        public virtual List<Household> HouseholdMembers { get; set; }
 
         [InverseProperty(nameof(Household.InvitedUsers))]
         public virtual List<Household> HouseholdsInvitedTo { get; set; }
+        public virtual List<Transaction> Transactions { get; set; }
 
         public ApplicationUser()
         {
-            Households = new List<Household>();
+            HouseholdMembers = new List<Household>();
             CreatedHouseholds = new List<Household>();
             HouseholdsInvitedTo = new List<Household>();
+            Transactions = new List<Transaction>();
         }
     }
 
@@ -47,10 +49,34 @@ namespace SD220_Deliverable_1_DGrouette.Models
         public DbSet<Household> Households { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Ensures on delete of a transaction, it doesn't create an inf loop of deleting. 
+            // However, it's required that all transactions of a category are deleted before the category can be deleted.
+            modelBuilder.Entity<Transaction>()
+                .HasRequired(p => p.Category)
+                .WithMany(p => p.Transactions)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(p => p.HouseholdMembers)
+                .WithMany(p => p.Members)
+                .Map(p => p.ToTable("HouseholdMembers"));
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(p => p.HouseholdsInvitedTo)
+                .WithMany(p => p.InvitedUsers)
+                .Map(p => p.ToTable("HouseholdInvitedUsers"));
+
         }
     }
 }

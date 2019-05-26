@@ -32,6 +32,7 @@ namespace SD220_Deliverable_1_DGrouette.Models
         public bool HasRegistered { get; set; }
 
         public string LoginProvider { get; set; }
+        public string Id { get; internal set; }
     }
 
     public class UserLoginInfoViewModel

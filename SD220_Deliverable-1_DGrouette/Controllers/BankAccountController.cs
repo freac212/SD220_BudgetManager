@@ -26,14 +26,13 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // POST api/bankaccount/create
         [HttpPost]
         [Route("create/{id:int}")]
-        [CreatorAuthorization]
-        public IHttpActionResult Create(int? id, BankAccountBindingModel bankAccountBindingModel)
+        [UserAuthorization(IdType = typeof(HouseholdCreator))]
+        public IHttpActionResult Create(int? Id, BankAccountBindingModel bankAccountBindingModel)
         {
-            // Id being the id of the Household
-            if (!ModelState.IsValid)
+            if (ModelState is null || !ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var household = DbContext.Households.FirstOrDefault(p => p.Id == id);
+            var household = DbContext.Households.FirstOrDefault(p => p.Id == Id);
             if (household is null)
                 return NotFound();
 
@@ -60,16 +59,16 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         }
 
         // Owner can edit an account
-        // POST api/category/edit/2
+        // POST api/bankaccount/edit/2
         [HttpPost]
         [Route("edit/{id:int}")]
-        [CategoryAuthorization]
-        public IHttpActionResult Edit(int? id, BankAccountBindingModel bindingModel)
+        [UserAuthorization(IdType = typeof(BankAccountCreator))] // only the owner of the household can edit the bank accounts
+        public IHttpActionResult Edit(int? Id, BankAccountBindingModel bindingModel)
         {
-            if (!ModelState.IsValid) // ++Q : Turn into filter.
+            if (ModelState is null || !ModelState.IsValid) // ++Q : Turn into filter.
                 return BadRequest(ModelState);
 
-            var bankAccount = DbContext.BankAccounts.FirstOrDefault(p => p.Id == id);
+            var bankAccount = DbContext.BankAccounts.FirstOrDefault(p => p.Id == Id);
             if (bankAccount is null)
                 return NotFound();
 
@@ -85,10 +84,10 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // POST api/bankAccount/delete/2
         [HttpDelete]
         [Route("delete/{id:int}")]
-        [CategoryAuthorization]
-        public IHttpActionResult Delete(int? id)
+        [UserAuthorization(IdType = typeof(BankAccountCreator))]
+        public IHttpActionResult Delete(int? Id)
         {
-            var removedBankAccount = DbContext.BankAccounts.Remove(DbContext.BankAccounts.FirstOrDefault(p => p.Id == id));
+            var removedBankAccount = DbContext.BankAccounts.Remove(DbContext.BankAccounts.FirstOrDefault(p => p.Id == Id));
 
             if (removedBankAccount != null)
             {
@@ -101,17 +100,19 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             }
         }
 
-        // All users of a household can see a list of all accounts for that household
+        // All users of a household can see a list of all BankAccounts for that household
         // GET api/bankaccount/getall
         [HttpGet]
-        [Route("getall")]
-        public IHttpActionResult GetAll()
+        [Route("getall/{id:int}")]
+        [UserAuthorization(IdType = typeof(HouseholdHouseMember))] // Ensures the user is a member of the household they're trying to access
+        public IHttpActionResult GetAll(int? Id)
         {
-            var userId = User.Identity.GetUserId();
-            if (userId is null)
+            // household Id
+            var household = DbContext.Households.FirstOrDefault(p => p.Id == Id);
+            if (household is null)
                 return NotFound();
 
-            var bankAccounts = DbContext.BankAccounts.Where(p => p.Household.Users.Any(i => i.Id == userId)).ToList();
+            var bankAccounts = household.BankAccounts.ToList();
             if (bankAccounts is null)
                 return NotFound();
 
@@ -122,6 +123,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // GET api/bankaccount/updatebalance/2
         [HttpGet]
         [Route("updatebalance/{id:int}")]
+        [UserAuthorization(IdType = typeof(BankAccountCreator))]
         public IHttpActionResult UpdateBalance(int? Id)
         {
             if (Id is null)
@@ -131,7 +133,8 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             if (bankAccount is null)
                 return NotFound();
 
-            bankAccount.UpdateBalance();
+            bankAccount.CalculateBalance();
+            DbContext.SaveChanges();
 
             return OkView(bankAccount);
         }
@@ -139,6 +142,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // === Extras for debugging. ===
         // GET api/bankaccount/getbyid/2
         [HttpGet]
+        [UserAuthorization(IdType = typeof(BankAccountHouseMember))]
         [Route("getbyid/{id:int}", Name = "GetBankAccountById")]
         public IHttpActionResult GetById(int? Id)
         {

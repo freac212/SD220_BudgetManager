@@ -15,5 +15,11 @@ namespace SD220_Deliverable_1_DGrouette.Models.Domain
 
         public virtual Household Household { get; set; }
         public int HouseholdId { get; set; }
+        public virtual List<Transaction> Transactions { get; set; }
+
+        public Category()
+        {
+            Transactions = new List<Transaction>();
+        }
     }
 }
