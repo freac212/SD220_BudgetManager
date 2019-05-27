@@ -14,7 +14,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Views
         public decimal Amount { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateUpdated { get; set; }
-        public bool Void { get; set; }
+        public bool IsVoid { get; set; }
         public int CategoryId { get; set; }
         public string CreatorId { get; set; }
         public int BankAccountId { get; set; }

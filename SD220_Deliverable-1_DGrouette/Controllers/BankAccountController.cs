@@ -104,7 +104,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // GET api/bankaccount/getall
         [HttpGet]
         [Route("getall/{id:int}")]
-        [UserAuthorization(IdType = typeof(HouseholdHouseMember))] // Ensures the user is a member of the household they're trying to access
+        [UserAuthorization(IdType = typeof(HouseholdHouseMember))]
         public IHttpActionResult GetAll(int? Id)
         {
             // household Id
@@ -119,7 +119,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             return OkView(bankAccounts);
         }
 
-        // The owner can update a bank accounts total at will (will just call bankaccountupdate, a universal method.)
+        // The owner can update a bank accounts total at will
         // GET api/bankaccount/updatebalance/2
         [HttpGet]
         [Route("updatebalance/{id:int}")]
@@ -127,7 +127,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         public IHttpActionResult UpdateBalance(int? Id)
         {
             if (Id is null)
-                return BadRequest();
+                return NotFound();
 
             var bankAccount = DbContext.BankAccounts.FirstOrDefault(p => p.Id == Id);
             if (bankAccount is null)
@@ -147,7 +147,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         public IHttpActionResult GetById(int? Id)
         {
             if (Id is null)
-                return BadRequest();
+                return NotFound();
 
             var bankAccount = DbContext.BankAccounts.FirstOrDefault(p => p.Id == Id);
             if (bankAccount is null)
