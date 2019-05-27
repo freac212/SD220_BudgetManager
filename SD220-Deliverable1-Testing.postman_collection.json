@@ -1,0 +1,5984 @@
+{
+	"info": {
+		"_postman_id": "06191878-96c1-4ffd-9b34-f23b2fd63b5d",
+		"name": "SD220-Deliverable1-Testing Copy",
+		"description": "Bunch of requests for testing the deliverable assignment 1.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register User A",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5e36bd7b-2777-4419-9093-0c82d520e1be",
+						"exec": [
+							"let user = pm.response.json();",
+							"pm.globals.set(\"UserAEmail\", user.email);",
+							"let pass = pm.globals.get(\"PasswordAC\");",
+							"pm.globals.set(\"PasswordA\", pass);",
+							"",
+							"pm.test(\"Ensure User Email is set\", function () { ",
+							"    pm.expect(pm.globals.get(\"UserAEmail\")).to.equal(user.email); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f83b1a26-d6c9-40b7-a2f9-ba00a4a9a3d8",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Email",
+							"value": "{{$guid}}{{UserAEmailC}}",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "{{PasswordAC}}",
+							"type": "text"
+						},
+						{
+							"key": "ConfirmPassword",
+							"value": "{{PasswordAC}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/Account/Register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Account",
+						"Register"
+					]
+				},
+				"description": "Registering an account."
+			},
+			"response": []
+		},
+		{
+			"name": "Register User B",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "368fc1b9-8147-4840-b56e-0e0d8beadb0a",
+						"exec": [
+							"let user = pm.response.json();",
+							"pm.globals.set(\"UserBEmail\", user.email);",
+							"let pass = pm.globals.get(\"PasswordBC\");",
+							"pm.globals.set(\"PasswordB\", pass);",
+							"",
+							"pm.test(\"Ensure User Email is set\", function () { ",
+							"    pm.expect(pm.globals.get(\"UserBEmail\")).to.equal(user.email); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Email",
+							"value": "{{$guid}}{{UserBEmailC}}",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "{{PasswordBC}}",
+							"type": "text"
+						},
+						{
+							"key": "ConfirmPassword",
+							"value": "{{PasswordBC}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/Account/Register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Account",
+						"Register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User C",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "368fc1b9-8147-4840-b56e-0e0d8beadb0a",
+						"exec": [
+							"let user = pm.response.json();",
+							"pm.globals.set(\"UserCEmail\", user.email);",
+							"let pass = pm.globals.get(\"PasswordCC\");",
+							"pm.globals.set(\"PasswordC\", pass);",
+							"",
+							"pm.test(\"Ensure User Email is set\", function () { ",
+							"    pm.expect(pm.globals.get(\"UserCEmail\")).to.equal(user.email); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Email",
+							"value": "{{$guid}}{{UserCEmailC}}",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "{{PasswordCC}}",
+							"type": "text"
+						},
+						{
+							"key": "ConfirmPassword",
+							"value": "{{PasswordCC}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/Account/Register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Account",
+						"Register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Empty Email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "368fc1b9-8147-4840-b56e-0e0d8beadb0a",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Email",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "{{PasswordAC}}",
+							"type": "text"
+						},
+						{
+							"key": "ConfirmPassword",
+							"value": "{{PasswordAC}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/Account/Register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Account",
+						"Register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Empty Password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "368fc1b9-8147-4840-b56e-0e0d8beadb0a",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Email",
+							"value": "{{$guid}}@fake.ca",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "ConfirmPassword",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/Account/Register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Account",
+						"Register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User A Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b2eb9083-c242-4b4b-b794-2742124bb339",
+						"exec": [
+							"let userToken = pm.response.json();",
+							"let token = \"Bearer \" + userToken.access_token;",
+							"pm.environment.set(\"UserAToken\", token);",
+							"",
+							"pm.test(\"Global User Token to be Set\", function () { ",
+							"    pm.expect(pm.environment.get(\"UserAToken\")).to.equal(token); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{UserAEmail}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{PasswordAC}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/token",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"token"
+					]
+				},
+				"description": "Getting auth token for registered user: test@test.ca"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User B Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b1698d02-010d-47d0-a680-59d187be2386",
+						"exec": [
+							"let userToken = pm.response.json();",
+							"let token = \"Bearer \" + userToken.access_token;",
+							"pm.environment.set(\"UserBToken\", token);",
+							"",
+							"pm.test(\"Global User Token to be Set\", function () { ",
+							"    pm.expect(pm.environment.get(\"UserBToken\")).to.equal(token); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{UserBEmail}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{PasswordBC}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/token",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"token"
+					]
+				},
+				"description": "Getting auth token for registered user: test@test.ca"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User C Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b1698d02-010d-47d0-a680-59d187be2386",
+						"exec": [
+							"let userToken = pm.response.json();",
+							"let token = \"Bearer \" + userToken.access_token;",
+							"pm.environment.set(\"UserCToken\", token);",
+							"",
+							"pm.test(\"Global User Token to be Set\", function () { ",
+							"    pm.expect(pm.environment.get(\"UserCToken\")).to.equal(token); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{UserCEmail}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{PasswordCC}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/token",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"token"
+					]
+				},
+				"description": "Getting auth token for registered user: test@test.ca"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User A Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b2eb9083-c242-4b4b-b794-2742124bb339",
+						"exec": [
+							"let user = pm.response.json();",
+							"let id = user.Id;",
+							"pm.environment.set(\"UserAId\", id);",
+							"",
+							"pm.test(\"User Id is to be not empty\", function () { ",
+							"    pm.expect(pm.environment.get(\"UserAId\")).to.not.equal(\"\"); ",
+							"});",
+							"",
+							"pm.test(\"User Id is to be set\", function () { ",
+							"    pm.expect(pm.environment.get(\"UserAId\")).to.equal(id); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{UserAToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{UserAEmail}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{PasswordAC}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/Account/UserInfo",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Account",
+						"UserInfo"
+					]
+				},
+				"description": "Getting auth token for registered user: test@test.ca"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User B Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b2eb9083-c242-4b4b-b794-2742124bb339",
+						"exec": [
+							"let user = pm.response.json();",
+							"let id = user.Id;",
+							"pm.environment.set(\"UserBId\", id);",
+							"",
+							"pm.test(\"User Id is to be not empty\", function () { ",
+							"    pm.expect(pm.environment.get(\"UserBId\")).to.not.equal(\"\"); ",
+							"});",
+							"",
+							"pm.test(\"User Id is to be set\", function () { ",
+							"    pm.expect(pm.environment.get(\"UserBId\")).to.equal(id); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserBToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{UserAEmail}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{PasswordAC}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/Account/UserInfo",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Account",
+						"UserInfo"
+					]
+				},
+				"description": "Getting auth token for registered user: test@test.ca"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User C Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b2eb9083-c242-4b4b-b794-2742124bb339",
+						"exec": [
+							"let user = pm.response.json();",
+							"let id = user.Id;",
+							"pm.environment.set(\"UserCId\", id);",
+							"",
+							"pm.test(\"User Id is to be not empty\", function () { ",
+							"    pm.expect(pm.environment.get(\"UserCId\")).to.not.equal(\"\"); ",
+							"});",
+							"",
+							"pm.test(\"User Id is to be set\", function () { ",
+							"    pm.expect(pm.environment.get(\"UserCId\")).to.equal(id); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserCToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{UserAEmail}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{PasswordAC}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/Account/UserInfo",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Account",
+						"UserInfo"
+					]
+				},
+				"description": "Getting auth token for registered user: test@test.ca"
+			},
+			"response": []
+		},
+		{
+			"name": "Change User Password - User A",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c9b7c8ae-e09c-4be4-ba96-ce2d818885b6",
+						"exec": [
+							"pm.test(\"Ensure User Token is not Empty\", function () { ",
+							"    pm.expect(pm.environment.get(\"UserAToken\")).to.not.equal(\"\"); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b47b7cd8-deff-41ed-9a8f-73460614ca43",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{UserAToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "OldPassword",
+							"value": "{{PasswordAC}}",
+							"type": "text"
+						},
+						{
+							"key": "NewPassword",
+							"value": "{{PasswordA_2C}}",
+							"type": "text"
+						},
+						{
+							"key": "ConfirmPassword",
+							"value": "{{PasswordA_2C}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/Account/ChangePassword",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Account",
+						"ChangePassword"
+					]
+				},
+				"description": "Changing password of a registered user."
+			},
+			"response": []
+		},
+		{
+			"name": "Change User Password - User B",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c9b7c8ae-e09c-4be4-ba96-ce2d818885b6",
+						"exec": [
+							"pm.test(\"Ensure User Token is not Empty\", function () { ",
+							"    pm.expect(pm.environment.get(\"UserBToken\")).to.not.equal(\"\"); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{UserBToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "OldPassword",
+							"value": "{{PasswordBC}}",
+							"type": "text"
+						},
+						{
+							"key": "NewPassword",
+							"value": "{{PasswordB_2C}}",
+							"type": "text"
+						},
+						{
+							"key": "ConfirmPassword",
+							"value": "{{PasswordB_2C}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/Account/ChangePassword",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Account",
+						"ChangePassword"
+					]
+				},
+				"description": "Changing password of a registered user."
+			},
+			"response": []
+		},
+		{
+			"name": "Household - User A creates houseX",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "88e1ac55-04da-43c4-b986-0c4c30bd4934",
+						"exec": [
+							"let jsonResponse = pm.response.json();",
+							"pm.globals.set(\"houseXId\", jsonResponse.Id);",
+							"",
+							"pm.test(\"User A is the creator\", function () { ",
+							"    pm.expect(pm.globals.get(\"UserAEmail\")).to.equal(jsonResponse.Creator); ",
+							"});",
+							"",
+							"pm.test(\"Global User Token to be Set\", function () { ",
+							"    pm.expect(pm.globals.get(\"houseXId\")).to.equal(jsonResponse.Id); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{UserAToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "House X - UserA",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "A house",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/household/create",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"household",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Household - User B creates houseY",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "15de424e-7277-4f84-ae8c-ac32d50b434e",
+						"exec": [
+							"let jsonResponse = pm.response.json();",
+							"pm.globals.set(\"houseYId\", jsonResponse.Id);",
+							"",
+							"pm.test(\"Global User Token to be Set\", function () { ",
+							"    pm.expect(pm.globals.get(\"houseYId\")).to.equal(jsonResponse.Id); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{UserBToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "House Y - UserB",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "A house",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/household/create",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"household",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Household - User A edits house X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2f7906aa-7c64-4ec5-ab2f-e62a6677b31c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{UserAToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "Still house X ",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "House X description - v2.",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/household/edit/{{houseXId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"household",
+						"edit",
+						"{{houseXId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Household - User A edits house Y",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b596bd18-b596-4583-86fa-fde4f9506a04",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{UserAToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "This technically shouldn't work..",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "If it does. Woops.",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/household/edit/{{houseYId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"household",
+						"edit",
+						"{{houseYId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Household - User B delete house Y",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "575438fc-7144-49dd-b927-676e1e385c71",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserBToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/household/delete/{{houseYId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"household",
+						"delete",
+						"{{houseYId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Household - User B delete house X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "575438fc-7144-49dd-b927-676e1e385c71",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserBToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/household/delete/{{houseXId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"household",
+						"delete",
+						"{{houseXId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Household - User A invite User B to House X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadc924a-f811-4e75-9c56-e0f8054f4070",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Email",
+							"value": "{{UserBEmail}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/household/invite/{{houseXId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"household",
+						"invite",
+						"{{houseXId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Household - User A invite User C to House X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadc924a-f811-4e75-9c56-e0f8054f4070",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Email",
+							"value": "{{UserCEmail}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/household/invite/{{houseXId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"household",
+						"invite",
+						"{{houseXId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Household - User A Joining house X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "470fc2e4-3ef5-4e7f-aa65-9871eff5e4f2",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/household/join/{{houseXId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"household",
+						"join",
+						"{{houseXId}}"
+					]
+				},
+				"description": "Should fail, since User A is the owner of House X"
+			},
+			"response": []
+		},
+		{
+			"name": "Household - User B Joining house X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "497ed73a-10e8-4d22-814c-e10e85332eb8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserBToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/household/join/{{houseXId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"household",
+						"join",
+						"{{houseXId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Household - User C Joining house X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "497ed73a-10e8-4d22-814c-e10e85332eb8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserCToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/household/join/{{houseXId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"household",
+						"join",
+						"{{houseXId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Household - User C Leaving house X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a6a912dc-8d97-445d-b508-92c73318d97f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserCToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/household/leave/{{houseXId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"household",
+						"leave",
+						"{{houseXId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Household - User A GetById house X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "38a133c9-4368-46bf-85e8-2c05c5f67752",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Object received contains the id of the house X\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.Id).to.eql(pm.globals.get(\"houseXId\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/household/getbyid/{{houseXId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"household",
+						"getbyid",
+						"{{houseXId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Household - User A GetAllUsers house X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "01fe066f-cdd9-4ca4-974e-396bf8e494f6",
+						"exec": [
+							"let jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Should expect an array of two users, User A, and User B.",
+							"// Loop through the array and check for UserAId;",
+							"",
+							"pm.test(\"User A's Id should be present\", function () {",
+							"    let returnVal = false;",
+							"    let userId = pm.environment.get(\"UserAId\");",
+							"    ",
+							"    jsonData.forEach(data => {",
+							"        console.log(userId);",
+							"        if(data.Id == userId){",
+							"            console.log(data.Id);",
+							"            returnVal = true;",
+							"        }",
+							"    });",
+							"        ",
+							"    pm.expect(returnVal).to.equal(true);",
+							"});",
+							"",
+							"pm.test(\"Response array should only contain two users\", function () {",
+							"    pm.expect(jsonData.length).to.eql(2);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/household/getallusers/{{houseXId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"household",
+						"getallusers",
+						"{{houseXId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Household - Households User A is in",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e26862d2-0bab-4c79-8ec8-cc4c4f0f553d",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var email = pm.globals.get(\"UserAEmail\");",
+							"var houseId = pm.globals.get(\"houseXId\")",
+							"// console.log(jsonData, email, houseId);",
+							"// console.log(jsonData[0].Creator);",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"The household returned, creator, should be User A's email\", function () {",
+							"    pm.expect(jsonData[0].Creator).to.eql(email);",
+							"});",
+							"",
+							"pm.test(\"The household returned, id, should equal house X's id\", function () {",
+							"    pm.expect(jsonData[0].Id).to.eql(houseId);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/household/user",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"household",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Household - Households User C is in Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e26862d2-0bab-4c79-8ec8-cc4c4f0f553d",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var houseId = pm.globals.get(\"houseXId\")",
+							"console.log(jsonData, houseId);",
+							"// console.log(jsonData[0].Creator);",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Expect returned array to be empty\", function () {",
+							"    pm.expect(jsonData).to.eql([]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserCToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/household/user",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"household",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category - User A Create Category 1 on house X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"console.log(response);",
+							"pm.globals.set(\"Category1Id\", response.Id);",
+							"",
+							"pm.test(\"Category Id to be Set\", function () { ",
+							"    pm.expect(pm.globals.get(\"Category1Id\")).to.equal(response.Id); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "Category 1",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Blah blah blah",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/category/create/{{houseXId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"category",
+						"create",
+						"{{houseXId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category - User A Edit Category 1 on house X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "585984a0-ed90-419a-accc-949ff8fc49f2",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "Category 1 edited",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Bloop bloop bloop",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/category/edit/{{Category1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"category",
+						"edit",
+						"{{Category1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category - User A GetById Category1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5cb5997a-a0dc-45a9-9fea-26fecf38f06f",
+						"exec": [
+							"let catId = pm.globals.get(\"Category1Id\"); ",
+							"",
+							"pm.test(\"Expect Id received to be Category1 Id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.Id).to.eql(catId);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/category/getbyid/{{Category1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"category",
+						"getbyid",
+						"{{Category1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category - User B Delete Category 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8af3711-d3f4-424c-a2ce-80e5a0dcb506",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserBToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/category/delete/{{Category1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"category",
+						"delete",
+						"{{Category1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category - User C Delete Category 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8d6e867d-8348-4027-8e27-c43c487ea72e",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserCToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/category/delete/{{Category1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"category",
+						"delete",
+						"{{Category1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category - User A Delete Category 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e449a539-3d36-40c4-8da0-9478a28b0064",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/category/delete/{{Category1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"category",
+						"delete",
+						"{{Category1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category - User A GetById Category 1 after delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "39c70879-00f4-4058-97e3-a03fd417eb40",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/category/getbyid/{{Category1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"category",
+						"getbyid",
+						"{{Category1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category - User A GetAll",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bc4c22d1-c0ce-4a45-b50c-9de0dcd48eeb",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body('[]');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/category/getall",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"category",
+						"getall"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category - User A Create Category 2 on house X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"console.log(response);",
+							"pm.globals.set(\"Category2Id\", response.Id);",
+							"",
+							"pm.test(\"Category Id to be Set\", function () { ",
+							"    pm.expect(pm.globals.get(\"Category2Id\")).to.equal(response.Id); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "Category 2",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Blah blah blah",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/category/create/{{houseXId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"category",
+						"create",
+						"{{houseXId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Household - GetAll -> for debug",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7993b44b-c3b1-4cb2-a518-2a7afa4d0c6a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/household/getall/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"household",
+						"getall",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BankAccount - User A Create Account1 on house X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"// console.log(response);",
+							"pm.globals.set(\"BankAccount1Id\", response.Id);",
+							"",
+							"pm.test(\"Bank Account Id to be Set\", function () { ",
+							"    pm.expect(pm.globals.get(\"BankAccount1Id\")).to.equal(response.Id); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "BankAccount 1",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Yeeeee",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/create/{{houseXId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"create",
+						"{{houseXId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BankAccount - User A Edit Account1 on house X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "BankAccount 1 Edited",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Yeeeeeeeeeeeeee",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/edit/{{BankAccount1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"edit",
+						"{{BankAccount1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BankAccount - User A GetById Account1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5cb5997a-a0dc-45a9-9fea-26fecf38f06f",
+						"exec": [
+							"let bankAccId = pm.globals.get(\"BankAccount1Id\"); ",
+							"",
+							"pm.test(\"Expect Id received to be BankAccount1 Id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.Id).to.eql(bankAccId);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getbyid/{{BankAccount1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getbyid",
+						"{{BankAccount1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BankAccount - User A GetAll Account1 on house X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5cb5997a-a0dc-45a9-9fea-26fecf38f06f",
+						"exec": [
+							"let bankAccId = pm.globals.get(\"BankAccount1Id\"); ",
+							"",
+							"pm.test(\"Expect Id received to be BankAccount1 Id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[0].Id).to.eql(bankAccId);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getall/{{houseXId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getall",
+						"{{houseXId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BankAccount - User B GetAll Account1 on house X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5cb5997a-a0dc-45a9-9fea-26fecf38f06f",
+						"exec": [
+							"let bankAccId = pm.globals.get(\"BankAccount1Id\"); ",
+							"",
+							"pm.test(\"Expect Id received to be BankAccount1 Id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[0].Id).to.eql(bankAccId);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserBToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getall/{{houseXId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getall",
+						"{{houseXId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BankAccount - User C GetAll Account1 on house X FAILS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5cb5997a-a0dc-45a9-9fea-26fecf38f06f",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserCToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getall/{{houseXId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getall",
+						"{{houseXId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BankAccount - User A Delete Account1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e449a539-3d36-40c4-8da0-9478a28b0064",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/delete/{{BankAccount1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"delete",
+						"{{BankAccount1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BankAccount - User A GetById Account1 After Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5cb5997a-a0dc-45a9-9fea-26fecf38f06f",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getbyid/{{BankAccount1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getbyid",
+						"{{BankAccount1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BankAccount - User A Create Account2 on house X",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"// console.log(response);",
+							"pm.globals.set(\"BankAccount2Id\", response.Id);",
+							"",
+							"pm.test(\"Bank Account Id to be Set\", function () { ",
+							"    pm.expect(pm.globals.get(\"BankAccount2Id\")).to.equal(response.Id); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "BankAccount 2",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Yeeeee",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/create/{{houseXId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"create",
+						"{{houseXId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Create Transaction1 on Account2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"// console.log(response);",
+							"pm.globals.set(\"Transaction1Id\", response.Id);",
+							"",
+							"pm.test(\"Transaction Id to be Set\", function () { ",
+							"    pm.expect(pm.globals.get(\"Transaction1Id\")).to.equal(response.Id); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Title",
+							"value": "Transaction 1",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Yarp",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "5/23/2019 3:01:03 PM",
+							"type": "text"
+						},
+						{
+							"key": "Amount",
+							"value": "{{Transaction1Amount1}}",
+							"type": "text"
+						},
+						{
+							"key": "CategoryId",
+							"value": "{{Category2Id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/create/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"create",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Verify Account2 Balance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"console.log(response);",
+							"",
+							"// let amount = pm.globals.get(\"Transaction1Amount1\");",
+							"// console.log(amount);",
+							"pm.test(`Account2 Balance should be ${402.54}`, function () { ",
+							"    pm.expect(response.Balance).to.equal(402.54); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getbyid/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getbyid",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User B Create Transaction2 on Account2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"// console.log(response);",
+							"pm.globals.set(\"Transaction2Id\", response.Id);",
+							"",
+							"pm.test(\"Transaction Id to be Set\", function () { ",
+							"    pm.expect(pm.globals.get(\"Transaction2Id\")).to.equal(response.Id); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserBToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Title",
+							"value": "Transaction 2",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Yarp",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "5/23/2019 3:01:03 PM",
+							"type": "text"
+						},
+						{
+							"key": "Amount",
+							"value": "{{Transaction2Amount1}}",
+							"type": "text"
+						},
+						{
+							"key": "CategoryId",
+							"value": "{{Category2Id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/create/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"create",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Verify Account2 Balance_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"console.log(response);",
+							"",
+							"let amount = pm.globals.get(\"Account2Balance1\");",
+							"// Apparently I don't have access to ANY VARIABLE IN THIS SCRIPT... POSTMAN IS A BUTT.",
+							"",
+							"pm.test(`Account2 Balance should be 503.01`, function () { ",
+							"    pm.expect(response.Balance).to.equal(503.01); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getbyid/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getbyid",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User C Create Transaction3 on Account2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserCToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Title",
+							"value": "Transaction 1",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Yarp",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "5/23/2019 3:01:03 PM",
+							"type": "text"
+						},
+						{
+							"key": "Amount",
+							"value": "56.39",
+							"type": "text"
+						},
+						{
+							"key": "CategoryId",
+							"value": "{{Category2Id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/create/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"create",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Edit Transaction1 on Account2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Title",
+							"value": "Transaction 1 - Edited",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Yarped",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "5/23/2019 3:02:03 PM",
+							"type": "text"
+						},
+						{
+							"key": "Amount",
+							"value": "{{Transaction1Amount2}}",
+							"type": "text"
+						},
+						{
+							"key": "CategoryId",
+							"value": "{{Category2Id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/edit/{{Transaction1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"edit",
+						"{{Transaction1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Verify Account2 Balance2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"console.log(response);",
+							"",
+							"let amount = pm.globals.get(\"Account2Balance1\");",
+							"// Apparently I don't have access to ANY VARIABLE IN THIS SCRIPT... POSTMAN IS A BUTT",
+							"",
+							"pm.test(`Account2 Balance should be -2899.53`, function () { ",
+							"    pm.expect(response.Balance).to.equal(-2899.53); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getbyid/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getbyid",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Edit Transaction1 on Account2 FAILS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"pm.globals.get(\"variable_key\");",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Title",
+							"value": "Transaction 1 - Edited",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Yarped",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "5/23/2019 3:02:03 PM",
+							"type": "text"
+						},
+						{
+							"key": "Amount",
+							"value": "150.00",
+							"type": "text"
+						},
+						{
+							"key": "CategoryId",
+							"value": "-56",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/edit/{{Transaction1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"edit",
+						"{{Transaction1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Edit Transaction2 on Account2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Title",
+							"value": "Transaction 2 - Edited",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Yarped",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "5/23/2019 3:07:03 PM",
+							"type": "text"
+						},
+						{
+							"key": "Amount",
+							"value": "{{Transaction2Amount3}}",
+							"type": "text"
+						},
+						{
+							"key": "CategoryId",
+							"value": "{{Category2Id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/edit/{{Transaction2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"edit",
+						"{{Transaction2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Verify Account2 Balance3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"console.log(response);",
+							"",
+							"let amount = pm.globals.get(\"Account2Balance1\");",
+							"// Apparently I don't have access to ANY VARIABLE IN THIS SCRIPT... POSTMAN IS A BUTT",
+							"",
+							"pm.test(`Account2 Balance should be -2800`, function () { ",
+							"    pm.expect(response.Balance).to.equal(-2800); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getbyid/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getbyid",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User B Edit Transaction1 FAILS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserBToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Title",
+							"value": "Transaction 1 - Edited",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Yarped",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "5/23/2019 3:02:03 PM",
+							"type": "text"
+						},
+						{
+							"key": "Amount",
+							"value": "150.00",
+							"type": "text"
+						},
+						{
+							"key": "CategoryId",
+							"value": "{{Category2Id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/edit/{{Transaction1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"edit",
+						"{{Transaction1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User B Edit Transaction2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserBToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Title",
+							"value": "Transaction 2 - Edited again",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Yarpedeededed",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "5/23/2019 3:10:03 PM",
+							"type": "text"
+						},
+						{
+							"key": "Amount",
+							"value": "{{Transaction2Amount4}}",
+							"type": "text"
+						},
+						{
+							"key": "CategoryId",
+							"value": "{{Category2Id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/edit/{{Transaction2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"edit",
+						"{{Transaction2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Verify Account2 Balance4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"console.log(response);",
+							"",
+							"let amount = pm.globals.get(\"Account2Balance1\");",
+							"// Apparently I don't have access to ANY VARIABLE IN THIS SCRIPT... POSTMAN IS A BUTT",
+							"",
+							"pm.test(`Account2 Balance should be 1`, function () { ",
+							"    pm.expect(response.Balance).to.equal(1); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getbyid/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getbyid",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User C Edit Transaction1 FAILS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserCToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Title",
+							"value": "Transaction 1 - Edited",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Yarped",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "5/23/2019 3:02:03 PM",
+							"type": "text"
+						},
+						{
+							"key": "Amount",
+							"value": "150.00",
+							"type": "text"
+						},
+						{
+							"key": "CategoryId",
+							"value": "{{Category2Id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/edit/{{Transaction1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"edit",
+						"{{Transaction1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User C Edit Transaction2 FAILS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserCToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Title",
+							"value": "Transaction 2 - Edited again",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Yarpedeededed",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "5/23/2019 3:10:03 PM",
+							"type": "text"
+						},
+						{
+							"key": "Amount",
+							"value": "600.38",
+							"type": "text"
+						},
+						{
+							"key": "CategoryId",
+							"value": "{{Category2Id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/edit/{{Transaction2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"edit",
+						"{{Transaction2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Verifying Edit Transaction1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"// console.log(response);",
+							"",
+							"pm.test(\"Expect object's id to be Transaction1's Id\", function () { ",
+							"    pm.expect(pm.globals.get(\"Transaction1Id\")).to.equal(response.Id); ",
+							"});",
+							"",
+							"pm.test(\"Expect title to be 'Transaction 1 - Edited'\", function () { ",
+							"    pm.expect(response.Title).to.equal(\"Transaction 1 - Edited\"); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/getbyid/{{Transaction1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"getbyid",
+						"{{Transaction1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Verifying Edit Transaction2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"// console.log(response);",
+							"",
+							"pm.test(\"Expect object's id to be Transaction2's Id\", function () { ",
+							"    pm.expect(pm.globals.get(\"Transaction2Id\")).to.equal(response.Id); ",
+							"});",
+							"",
+							"pm.test(\"Expect title to be 'Transaction 2 - Edited again'\", function () { ",
+							"    pm.expect(response.Title).to.equal(\"Transaction 2 - Edited again\"); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/getbyid/{{Transaction2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"getbyid",
+						"{{Transaction2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A switchVoid Transaction1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"pm.globals.get(\"variable_key\");",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/switchvoid/{{Transaction1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"switchvoid",
+						"{{Transaction1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Verify Account2 Balance5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"console.log(response);",
+							"",
+							"pm.test(`Account2 Balance should be 3001`, function () { ",
+							"    pm.expect(response.Balance).to.equal(3001); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getbyid/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getbyid",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A switchVoid Transaction2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"pm.globals.get(\"variable_key\");",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/switchvoid/{{Transaction2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"switchvoid",
+						"{{Transaction2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Verify Account2 Balance6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"console.log(response);",
+							"",
+							"pm.test(`Account2 Balance should be 0`, function () { ",
+							"    pm.expect(response.Balance).to.equal(0); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getbyid/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getbyid",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User B switchVoid Transaction1 FAILS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"pm.globals.get(\"variable_key\");",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserBToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/switchvoid/{{Transaction1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"switchvoid",
+						"{{Transaction1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User B switchVoid Transaction2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"pm.globals.get(\"variable_key\");",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserBToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/switchvoid/{{Transaction2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"switchvoid",
+						"{{Transaction2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Verify Account2 Balance7",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"console.log(response);",
+							"",
+							"pm.test(`Account2 Balance should be 3001`, function () { ",
+							"    pm.expect(response.Balance).to.equal(3001); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getbyid/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getbyid",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Edit Transaction1 on Account2 COPY",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Title",
+							"value": "Transaction 1 - Edited",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Yarped",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "5/23/2019 3:02:03 PM",
+							"type": "text"
+						},
+						{
+							"key": "Amount",
+							"value": "-10000",
+							"type": "text"
+						},
+						{
+							"key": "CategoryId",
+							"value": "{{Category2Id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/edit/{{Transaction1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"edit",
+						"{{Transaction1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Verify Account2 Balance8",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"console.log(response);",
+							"",
+							"pm.test(`Account2 Balance should be 3001`, function () { ",
+							"    pm.expect(response.Balance).to.equal(3001); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getbyid/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getbyid",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User C switchVoid Transaction1 FAILS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"pm.globals.get(\"variable_key\");",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserCToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/switchvoid/{{Transaction1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"switchvoid",
+						"{{Transaction1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User C switchVoid Transaction2 FAILS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"pm.globals.get(\"variable_key\");",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserCToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/switchvoid/{{Transaction2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"switchvoid",
+						"{{Transaction2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User B Delete Transaction1 FAILS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserBToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/delete/{{Transaction1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"delete",
+						"{{Transaction1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User C Delete Transaction1 FAILS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserCToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/delete/{{Transaction1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"delete",
+						"{{Transaction1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User C Delete Transaction2 FAILS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserCToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/delete/{{Transaction2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"delete",
+						"{{Transaction2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Delete Transaction2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/delete/{{Transaction2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"delete",
+						"{{Transaction2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Verify Account2 Balance9",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"console.log(response);",
+							"",
+							"pm.test(`Account2 Balance should be 0`, function () { ",
+							"    pm.expect(response.Balance).to.equal(0); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getbyid/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getbyid",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Delete Transaction1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/delete/{{Transaction1Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"delete",
+						"{{Transaction1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Verify Account2 Balance10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"console.log(response);",
+							"",
+							"pm.test(`Account2 Balance should be 0`, function () { ",
+							"    pm.expect(response.Balance).to.equal(0); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getbyid/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getbyid",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User B Create Transaction4 on Account2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"// console.log(response);",
+							"pm.globals.set(\"Transaction4Id\", response.Id);",
+							"",
+							"pm.test(\"Transaction Id to be Set\", function () { ",
+							"    pm.expect(pm.globals.get(\"Transaction4Id\")).to.equal(response.Id); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserBToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Title",
+							"value": "Transaction 4",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "ya",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "5/23/2019 3:12:03 PM",
+							"type": "text"
+						},
+						{
+							"key": "Amount",
+							"value": "75.5874",
+							"type": "text"
+						},
+						{
+							"key": "CategoryId",
+							"value": "{{Category2Id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/create/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"create",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Verify Account2 Balance11",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"console.log(response);",
+							"",
+							"pm.test(`Account2 Balance should be 75.58`, function () { ",
+							"    pm.expect(response.Balance).to.equal(75.58); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getbyid/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getbyid",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A UpdateBalance Account2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/updatebalance/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"updatebalance",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Verify Account2 Balance12",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"console.log(response);",
+							"",
+							"pm.test(`Account2 Balance should be 75.58`, function () { ",
+							"    pm.expect(response.Balance).to.equal(75.58); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getbyid/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getbyid",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User B Delete Transaction4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserBToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/delete/{{Transaction4Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"delete",
+						"{{Transaction4Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Verify Account2 Balance13",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"console.log(response);",
+							"",
+							"pm.test(`Account2 Balance should be 0`, function () { ",
+							"    pm.expect(response.Balance).to.equal(0); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/bankaccount/getbyid/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bankaccount",
+						"getbyid",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A Create Transaction5 on Account2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"// console.log(response);",
+							"pm.globals.set(\"Transaction5Id\", response.Id);",
+							"",
+							"pm.test(\"Transaction Id to be Set\", function () { ",
+							"    pm.expect(pm.globals.get(\"Transaction5Id\")).to.equal(response.Id); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Title",
+							"value": "Transaction 5",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "woop",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "5/23/2019 4:00:03 PM",
+							"type": "text"
+						},
+						{
+							"key": "Amount",
+							"value": "78.36",
+							"type": "text"
+						},
+						{
+							"key": "CategoryId",
+							"value": "{{Category2Id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/create/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"create",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User A GetAll transactions on Account2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"// console.log(response);",
+							"",
+							"pm.test(\"Expect object's id to be Transaction5's Id\", function () { ",
+							"    pm.expect(pm.globals.get(\"Transaction5Id\")).to.equal(response[0].Id); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserAToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/getall/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"getall",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User B GetAll transactions on Account2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"let response = pm.response.json();",
+							"// console.log(response);",
+							"",
+							"pm.test(\"Expect object's id to be Transaction5's Id\", function () { ",
+							"    pm.expect(pm.globals.get(\"Transaction5Id\")).to.equal(response[0].Id); ",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserBToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/getall/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"getall",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction - User C GetAll transactions on Account2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58fc30c6-f119-4797-93c2-2ab23c6d1d92",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{UserCToken}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/api/transaction/getall/{{BankAccount2Id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transaction",
+						"getall",
+						"{{BankAccount2Id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "73b2f54c-cc00-4299-b928-9f69bd338d23",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b468963d-9d30-49ab-99ed-b9fd7c40b113",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "d06f702e-c91b-40fd-937e-0f5dd00bf192",
+			"key": "url",
+			"value": "http://localhost:52445",
+			"type": "string"
+		},
+		{
+			"id": "f03ccab6-8b82-4f78-896f-f2ba853f9c6e",
+			"key": "UserAEmailC",
+			"value": "test@test.ca",
+			"type": "string"
+		},
+		{
+			"id": "2f930b21-cfdf-497b-a0b1-786c5dfcf126",
+			"key": "UserBEmailC",
+			"value": "tester@test.ca",
+			"type": "string"
+		},
+		{
+			"id": "2a8bf78f-ea4c-4621-bf96-e7da4c9bc2c9",
+			"key": "UserCEmailC",
+			"value": "teeest@test.ca",
+			"type": "string"
+		},
+		{
+			"id": "c7ce5807-c252-462b-ada1-81992fcccb74",
+			"key": "PasswordAC",
+			"value": "Password-1",
+			"type": "string"
+		},
+		{
+			"id": "36bca9f7-91b2-46ea-8ac4-8b395960ef2a",
+			"key": "PasswordBC",
+			"value": "Password-1",
+			"type": "string"
+		},
+		{
+			"id": "eb814ea4-f9ff-4064-ab68-fc0e80f8fee1",
+			"key": "PasswordCC",
+			"value": "Password-1\n",
+			"type": "string"
+		},
+		{
+			"id": "0d3b6a3d-a0d5-453e-8316-05a89fcf1291",
+			"key": "PasswordA_2C",
+			"value": "Password-2",
+			"type": "string"
+		},
+		{
+			"id": "78bc3366-c629-4dc1-b319-54093e8b7e2b",
+			"key": "PasswordB_2C",
+			"value": "Password-2",
+			"type": "string"
+		},
+		{
+			"id": "90b1c23f-e9d9-4c9e-a36d-bab4f37fde22",
+			"key": "PasswordC_2C",
+			"value": "Password-2",
+			"type": "string"
+		},
+		{
+			"id": "2d95331f-0308-463d-a282-ffad2f635053",
+			"key": "Transaction1Amount1",
+			"value": "402.54",
+			"type": "string"
+		},
+		{
+			"id": "8347bc16-c24b-4a65-931e-80d79003dfe0",
+			"key": "Transaction2Amount1",
+			"value": "100.47",
+			"type": "string"
+		},
+		{
+			"id": "6811c44b-5d7b-4e6b-abc4-2e8c9a230ea6",
+			"key": "Account2Balance1",
+			"value": "503.01",
+			"type": "string"
+		},
+		{
+			"id": "a3ba16f3-4bad-45a6-a553-b086be8ba962",
+			"key": "Transaction1Amount2",
+			"value": "-3000",
+			"type": "string"
+		},
+		{
+			"id": "5f58972d-c193-4b9f-9c54-1cd3097fd124",
+			"key": "Account2Balance2",
+			"value": "-2899.53",
+			"type": "string"
+		},
+		{
+			"id": "32704a03-294f-495d-b29f-358adf58b9ce",
+			"key": "Transaction2Amount3",
+			"value": "200",
+			"type": "string"
+		},
+		{
+			"id": "99d7d1b8-9451-4660-9e9d-5b25866daeff",
+			"key": "Account2Balance3",
+			"value": "-2800",
+			"type": "string"
+		},
+		{
+			"id": "34157e9e-3ca6-4646-8a9d-b1bf946fa72a",
+			"key": "Transaction2Amount4",
+			"value": "3001",
+			"type": "string"
+		},
+		{
+			"id": "69aeb138-a449-4b8d-b6c2-59e1409f9c39",
+			"key": "Account2Balance4",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}
