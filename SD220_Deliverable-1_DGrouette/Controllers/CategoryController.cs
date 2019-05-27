@@ -126,7 +126,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         public IHttpActionResult GetById(int? Id)
         {
             if (Id is null)
-                return BadRequest();
+                return BadRequest("Id is invalid");
 
             var category = DbContext.Categories.FirstOrDefault(p => p.Id == Id);
             if (category is null)

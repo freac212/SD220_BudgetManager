@@ -175,7 +175,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         public IHttpActionResult GetById(int? Id)
         {
             if (Id is null)
-                return NotFound();
+                return BadRequest("Id is invalid");
 
             var transaction = DbContext.Transactions.FirstOrDefault(p => p.Id == Id);
             if (transaction is null)

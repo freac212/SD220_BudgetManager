@@ -101,7 +101,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             // the link allows the user to add themselves to the household, but only if they're invited! (on the invite list)
 
             if (String.IsNullOrEmpty(bindingModel.Email))
-                return BadRequest();
+                return BadRequest("Email is invalid.");
 
             var Inviteduser = UserManager.FindByEmail(bindingModel.Email);
             if (Inviteduser is null)
@@ -165,7 +165,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             }
             else
             {
-                return BadRequest();
+                return BadRequest("This user hasn't been invited to this household");
             }
         }
 
@@ -273,7 +273,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         public IHttpActionResult GetById(int? Id)
         {
             if (Id is null)
-                return BadRequest();
+                return BadRequest("Id is invalid");
 
             var household = DbContext.Households.FirstOrDefault(p => p.Id == Id);
 
