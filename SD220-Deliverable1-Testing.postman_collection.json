@@ -1441,11 +1441,8 @@
 					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -1495,11 +1492,8 @@
 					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -1548,11 +1542,8 @@
 					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -5867,115 +5858,115 @@
 	],
 	"variable": [
 		{
-			"id": "d06f702e-c91b-40fd-937e-0f5dd00bf192",
+			"id": "9651bbb6-ea59-445e-bcdf-ed30850bd74a",
 			"key": "url",
 			"value": "http://localhost:52445",
 			"type": "string"
 		},
 		{
-			"id": "f03ccab6-8b82-4f78-896f-f2ba853f9c6e",
+			"id": "67b288c0-9132-465a-b8d2-a8ca3c55f16e",
 			"key": "UserAEmailC",
 			"value": "test@test.ca",
 			"type": "string"
 		},
 		{
-			"id": "2f930b21-cfdf-497b-a0b1-786c5dfcf126",
+			"id": "1678e497-bfb5-4ed3-894f-50a264d0874d",
 			"key": "UserBEmailC",
 			"value": "tester@test.ca",
 			"type": "string"
 		},
 		{
-			"id": "2a8bf78f-ea4c-4621-bf96-e7da4c9bc2c9",
+			"id": "2f299f4a-3105-4b40-9a79-9f5ef031238b",
 			"key": "UserCEmailC",
 			"value": "teeest@test.ca",
 			"type": "string"
 		},
 		{
-			"id": "c7ce5807-c252-462b-ada1-81992fcccb74",
+			"id": "16f18c61-5efd-4259-a037-cd06ce8341c9",
 			"key": "PasswordAC",
 			"value": "Password-1",
 			"type": "string"
 		},
 		{
-			"id": "36bca9f7-91b2-46ea-8ac4-8b395960ef2a",
+			"id": "c337f4c3-e0be-430f-863c-3da3da8d1231",
 			"key": "PasswordBC",
 			"value": "Password-1",
 			"type": "string"
 		},
 		{
-			"id": "eb814ea4-f9ff-4064-ab68-fc0e80f8fee1",
+			"id": "1a10746e-4aa0-4f2d-a254-6b8558943485",
 			"key": "PasswordCC",
 			"value": "Password-1\n",
 			"type": "string"
 		},
 		{
-			"id": "0d3b6a3d-a0d5-453e-8316-05a89fcf1291",
+			"id": "1c6e166c-d17a-4c3c-a7cf-346c24bd3c3a",
 			"key": "PasswordA_2C",
 			"value": "Password-2",
 			"type": "string"
 		},
 		{
-			"id": "78bc3366-c629-4dc1-b319-54093e8b7e2b",
+			"id": "0d05b7ff-77b8-4ac4-94be-3012282c515e",
 			"key": "PasswordB_2C",
 			"value": "Password-2",
 			"type": "string"
 		},
 		{
-			"id": "90b1c23f-e9d9-4c9e-a36d-bab4f37fde22",
+			"id": "280dc1b6-01a7-446a-80af-dd4ff53b4420",
 			"key": "PasswordC_2C",
 			"value": "Password-2",
 			"type": "string"
 		},
 		{
-			"id": "2d95331f-0308-463d-a282-ffad2f635053",
+			"id": "56c993e4-270e-4e84-a84e-851f4bdd70b8",
 			"key": "Transaction1Amount1",
 			"value": "402.54",
 			"type": "string"
 		},
 		{
-			"id": "8347bc16-c24b-4a65-931e-80d79003dfe0",
+			"id": "6979768d-fe2f-4782-8dd7-fa6612abee37",
 			"key": "Transaction2Amount1",
 			"value": "100.47",
 			"type": "string"
 		},
 		{
-			"id": "6811c44b-5d7b-4e6b-abc4-2e8c9a230ea6",
+			"id": "1200fa6a-c84f-4c65-9299-39f2f2d745eb",
 			"key": "Account2Balance1",
 			"value": "503.01",
 			"type": "string"
 		},
 		{
-			"id": "a3ba16f3-4bad-45a6-a553-b086be8ba962",
+			"id": "19a89a99-cc0f-43ec-8225-daacdef6816f",
 			"key": "Transaction1Amount2",
 			"value": "-3000",
 			"type": "string"
 		},
 		{
-			"id": "5f58972d-c193-4b9f-9c54-1cd3097fd124",
+			"id": "a3970f4e-7a8a-47de-8ae8-c9c3d06ce7e0",
 			"key": "Account2Balance2",
 			"value": "-2899.53",
 			"type": "string"
 		},
 		{
-			"id": "32704a03-294f-495d-b29f-358adf58b9ce",
+			"id": "337c47ab-0977-46ef-aeb4-03000ee62ad6",
 			"key": "Transaction2Amount3",
 			"value": "200",
 			"type": "string"
 		},
 		{
-			"id": "99d7d1b8-9451-4660-9e9d-5b25866daeff",
+			"id": "6ecb821c-ef85-4eef-a97a-4d4a12ef3cda",
 			"key": "Account2Balance3",
 			"value": "-2800",
 			"type": "string"
 		},
 		{
-			"id": "34157e9e-3ca6-4646-8a9d-b1bf946fa72a",
+			"id": "9af087d7-2f11-45c3-9bb6-abc3dd3e26a3",
 			"key": "Transaction2Amount4",
 			"value": "3001",
 			"type": "string"
 		},
 		{
-			"id": "69aeb138-a449-4b8d-b6c2-59e1409f9c39",
+			"id": "e59cf1b5-2cfa-4b76-ae9e-81a0ef4a54d3",
 			"key": "Account2Balance4",
 			"value": "1",
 			"type": "string"

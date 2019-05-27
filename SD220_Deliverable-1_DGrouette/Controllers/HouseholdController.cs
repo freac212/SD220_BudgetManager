@@ -139,8 +139,8 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         }
 
         // >Registered users should be able to join households they were invited to. 
-        // GET api/household/join
-        [HttpGet]
+        // POST api/household/join
+        [HttpPost]
         [Route("join/{id:int}")]
         public IHttpActionResult Join(int Id)
         {
