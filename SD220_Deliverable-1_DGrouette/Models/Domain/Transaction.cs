@@ -14,7 +14,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Domain
         public decimal Amount { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateUpdated { get; set; }
-        public bool isVoid { get; set; }
+        public bool IsVoid { get; set; }
 
         public virtual Category Category { get; set; }
         public int CategoryId { get; set; }
@@ -22,5 +22,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Domain
         public string CreatorId { get; set; }
         public virtual BankAccount BankAccount { get; set; }
         public int BankAccountId { get; set; }
+
+        // DateCreated in constructor ++Q
     }
 }

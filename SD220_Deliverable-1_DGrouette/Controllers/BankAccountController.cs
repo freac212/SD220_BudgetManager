@@ -121,7 +121,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
 
         // The owner can update a bank accounts total at will
         // GET api/bankaccount/updatebalance/2
-        [HttpGet]
+        [HttpGet] // Change to post ++Q -> Post because we're changing the database
         [Route("updatebalance/{id:int}")]
         [UserAuthorization(IdType = typeof(BankAccountCreator))]
         public IHttpActionResult UpdateBalance(int? Id)

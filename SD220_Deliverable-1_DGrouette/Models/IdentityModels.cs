@@ -62,6 +62,9 @@ namespace SD220_Deliverable_1_DGrouette.Models
 
             // Ensures on delete of a transaction, it doesn't create an inf loop of deleting. 
             // However, it's required that all transactions of a category are deleted before the category can be deleted.
+
+            // Review Version: Household -> category, my version: Transaction -> category.
+            // I'm thinking Household -> category would actually be easier, remember to later add a remove all categories before the removal of a household to avoid an error! ++Q
             modelBuilder.Entity<Transaction>()
                 .HasRequired(p => p.Category)
                 .WithMany(p => p.Transactions)

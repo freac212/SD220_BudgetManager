@@ -51,7 +51,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
                 DateCreated = DateTime.Now,
                 DateUpdated = null,
                 BankAccountId = (int)Id,
-                isVoid = false
+                IsVoid = false
             };
 
             bankAccount.AddTransaction(transaction);
@@ -76,14 +76,14 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             if (transaction is null)
                 return NotFound();
 
-            if (transaction.isVoid)
+            if (transaction.IsVoid)
             {
                 transaction.BankAccount.Balance += transaction.Amount;
-                transaction.isVoid = false;
+                transaction.IsVoid = false;
             } else
             {
                 transaction.BankAccount.Balance -= transaction.Amount;
-                transaction.isVoid = true;
+                transaction.IsVoid = true;
             }
             DbContext.SaveChanges();
 
@@ -107,7 +107,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             if (transaction is null)
                 return NotFound();
 
-            if (!transaction.isVoid)
+            if (!transaction.IsVoid)
             {
                 transaction.BankAccount.Balance -= transaction.Amount; // Removing the old transaction amount
                 transaction.BankAccount.Balance += bindingModel.Amount; // Adding the new amounts

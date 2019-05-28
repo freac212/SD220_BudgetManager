@@ -19,6 +19,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Domain
 
         public Category()
         {
+            // Can also set DateCreated here ++Q
             Transactions = new List<Transaction>();
         }
     }

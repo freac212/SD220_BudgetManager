@@ -22,7 +22,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Helpers
                 DateUpdated = transaction.DateUpdated,
                 Date = transaction.Date,
                 Amount = transaction.Amount,
-                IsVoid = transaction.isVoid,
+                IsVoid = transaction.IsVoid,
                 CategoryId = transaction.CategoryId,
                 CreatorId = transaction.CreatorId,
                 BankAccountId = transaction.BankAccountId
