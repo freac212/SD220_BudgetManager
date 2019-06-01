@@ -375,15 +375,17 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             return Ok();
         }
 
-        // GET api/Account/ResetPasswordLink
-        [HttpGet]
+        // POST api/Account/ResetPasswordLink
+        [HttpPost]
         [AllowAnonymous] // Because the user isn't logged in to reset their password.
         [Route("SendResetPassword")]
         public IHttpActionResult SendResetPassword(SendResetPasswordBindingModel passwordResetModel)
         {
             // If authenticated properly, return a link for the user to click to reset their password.
-            // Currently the link doesn't goto a view, so in order to test it, we use the data from the link,
-            // to post the new password to the app in postman.
+            if (ModelState is null || !ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             var user = UserManager.FindByEmail(passwordResetModel.Email);
 
@@ -391,9 +393,8 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
                 return Ok("If that email exists, we've send it a reset password link.");
 
             string resetToken = UserManager.GeneratePasswordResetTokenAsync(user.Id).Result;
-            var callbackUrl = Url.Link("Default", new { Controller = "Account", Action = "ResetPassword", token = resetToken });
-
-            // Also on the UserManager exists a "SendEmail" class, could have used that too.
+            var callbackUrl = passwordResetModel.Url + $"?token={HttpUtility.UrlEncode(resetToken)}&email={HttpUtility.UrlEncode(passwordResetModel.Email)}";
+            //var callbackUrl = Url.Link("Default", new { Controller = "Account", Action = "ResetPassword", token = resetToken });
 
             var emailService = new EmailService();
             emailService.Send(user.Email, $@"
@@ -401,11 +402,10 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
                     <h2>Link to reset your password.</h2>
                     <p>If you didn't send this link, we reccomend you contact support immediately at 1-204-123-4567 or email us a 'wereFake@fake.ca'.</p>
                     <a href='{callbackUrl}'>{callbackUrl}</a>
-                    <p>Reset Token: ' {resetToken} '</p>
                 </div>
             ", "Reset your password - BudgetManager");
 
-            return Ok("If that email exists, we've send it a reset password link.");
+            return Ok(resetToken);
         }
 
         // GET api/Account/ResetPassword
