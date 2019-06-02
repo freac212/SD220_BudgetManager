@@ -9,7 +9,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Helpers
 {
     public static class HouseholdHelpers
     {
-        public static HouseholdViewModel MapHouseholdToView(Domain.Household household)
+        public static HouseholdViewModel MapHouseholdToView(Domain.Household household, string userId)
         {
             return new HouseholdViewModel()
             {
@@ -19,6 +19,8 @@ namespace SD220_Deliverable_1_DGrouette.Models.Helpers
                 Name = household.Name,
                 Description = household.Description,
                 Creator = household.Creator.Email,
+                IsCreator = household.CreatorId == userId,
+                IsMember = household.Members.Any(p => p.Id == userId),
                 HouseholdUsers = household.Members.Select(p => new HouseholdUserViewModel()
                 {
                     Id = p.Id,
@@ -35,6 +37,16 @@ namespace SD220_Deliverable_1_DGrouette.Models.Helpers
                     HouseholdId = p.HouseholdId
                 }).ToList()
              };
+        }
+
+        public static InviteViewModel MapInviteToView(Domain.Household household)
+        {
+            return new InviteViewModel()
+            {
+                Id = household.Id,
+                Name = household.Name,
+                Creator = household.Creator.Email
+            };
         }
 
         internal static object MapCategoryToView(Category category)

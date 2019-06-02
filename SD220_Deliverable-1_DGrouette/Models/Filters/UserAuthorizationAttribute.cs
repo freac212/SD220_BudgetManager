@@ -126,7 +126,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Filters
             ITypeFilterHelper domainClass = (ITypeFilterHelper)Activator.CreateInstance(IdType);
 
             if (!domainClass.Execute(objectId, userId))
-                actionContext.Response = new HttpResponseMessage(HttpStatusCode.NotFound);
+                actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
         }
     }
 }

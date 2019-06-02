@@ -52,7 +52,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             DbContext.Households.Add(household);
             DbContext.SaveChanges();
 
-            var householdView = HouseholdHelpers.MapHouseholdToView(household);
+            var householdView = HouseholdHelpers.MapHouseholdToView(household, user.Id);
 
             return Created(Url.Link(
                 "GetHouseholdById",
@@ -84,7 +84,9 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             household.Description = householdBinding.Description;
             DbContext.SaveChanges();
 
-            var householdView = HouseholdHelpers.MapHouseholdToView(household);
+            var userId = User.Identity.GetUserId();
+
+            var householdView = HouseholdHelpers.MapHouseholdToView(household, userId);
 
             return Ok(householdView);
         }
@@ -102,6 +104,9 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
 
             if (String.IsNullOrEmpty(bindingModel.Email))
                 return BadRequest("Email is invalid.");
+
+            if(String.IsNullOrEmpty(bindingModel.CallbackUrl))
+                return BadRequest("CallbackUrl is invalid.");
 
             var Inviteduser = UserManager.FindByEmail(bindingModel.Email);
             if (Inviteduser is null)
@@ -123,14 +128,14 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             household.InvitedUsers.Add(Inviteduser);
             DbContext.SaveChanges();
 
-            var callbackUrl = Url.Link("Default", new { Controller = "Household", Action = "Join", Id = household.Id });
+            //var callbackUrl = Url.Link("Default", new { Controller = "Household", Action = "Join", Id = household.Id });
 
             var emailService = new EmailService();
             emailService.Send(Inviteduser.Email, $@"
                     <div>
                         <h2>Link to join '{household.Name}' Household</h2>
                         <p>Invited by {household.Creator.Email}</p>
-                        <a href='{callbackUrl}'>{callbackUrl}</a>
+                        <a href='{bindingModel.CallbackUrl}'>{bindingModel.CallbackUrl}</a>
                     </div>"
                 , $"You've been invited to {household.Name} - BudgetManager");
 
@@ -142,8 +147,11 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // POST api/household/join
         [HttpPost]
         [Route("join/{id:int}")]
-        public IHttpActionResult Join(int Id)
+        public IHttpActionResult Join(int? Id)
         {
+            if(Id is null)
+                return BadRequest("Id is invalid.");
+
             // Check to see if the user making this request in the on the household and flagged as invited.
             var household = DbContext.Households.FirstOrDefault(p => p.Id == Id);
             if (household is null)
@@ -176,6 +184,9 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         [UserAuthorization(IdType = typeof(HouseholdCreator))]
         public IHttpActionResult Delete(int? Id)
         {
+            if (Id is null)
+                return BadRequest("Id is invalid.");
+
             // Inorder to avoid getting the error for cascade deleting, we need to change something in the onModelCreating, adding .WillCascadeOnDelete(false);
             var removedHousehold = DbContext.Households.Remove(DbContext.Households.FirstOrDefault(p => p.Id == Id));
 
@@ -196,6 +207,9 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         [Route("getallusers/{id:int}")]
         public IHttpActionResult GetAllUsers(int? Id)
         {
+            if (Id is null)
+                return BadRequest("Id is invalid.");
+
             var householdUsers = DbContext.Households.FirstOrDefault(p => p.Id == Id).Members;
             if (householdUsers is null)
                 return NotFound();
@@ -210,17 +224,19 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             return Ok(householdUsersView);
         }
 
-        // >List all households that a users in ::Extra::
-        // GET api/household/usershouseholds
+        // >List all households that a users in
+        // GET api/household/getall
         [HttpGet]
-        [Route("user")]
+        [Route("getall")]
         public IHttpActionResult GetAllUserHouseholds()
         {
             var userHouseholds = UserManager.FindById(User.Identity.GetUserId()).HouseholdMembers;
             if (userHouseholds is null)
                 return NotFound();
 
-            var userHouseholdsView = userHouseholds.Select(p => HouseholdHelpers.MapHouseholdToView(p));
+            var userId = User.Identity.GetUserId();
+
+            var userHouseholdsView = userHouseholds.Select(p => HouseholdHelpers.MapHouseholdToView(p, userId));
 
             return Ok(userHouseholdsView);
         }
@@ -231,6 +247,9 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         [Route("leave/{id:int}")]
         public IHttpActionResult Leave(int? Id)
         {
+            if (Id is null)
+                return BadRequest("Id is invalid.");
+
             var user = UserManager.FindById(User.Identity.GetUserId());
             if (user is null)
                 return NotFound();
@@ -252,17 +271,58 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             }
         }
 
-        // === Extras for debugging. ===
-        // GET api/household/getall
+        // === Extras for debugging. ===        
+        // GET api/household/getallinvites
         [HttpGet]
-        [Route("getall")]
+        [Route("getallinvites")]
+        public IHttpActionResult GetAllInvites()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = UserManager.FindById(userId);
+            if (user is null)
+                return NotFound();
+
+            var invites = user.HouseholdsInvitedTo.ToList();
+
+            var invitesView = invites.Select(p => HouseholdHelpers.MapInviteToView(p));
+
+            return Ok(invitesView);
+        }
+
+        // GET api/household/isusercreator
+        [HttpGet]
+        [Route("isusercreator/{id:int}")]
+        public IHttpActionResult IsUserCreator(int? Id)
+        {
+            if (Id is null)
+                return BadRequest("Id is invalid.");
+
+            var userId = User.Identity.GetUserId();
+
+            var household = DbContext.Households.FirstOrDefault(p => p.Id == Id);
+            if (household is null)
+                return NotFound();
+
+            var isCreatorView = new IsCreatorViewModel()
+            {
+                IsCreator = household.CreatorId == userId
+            };
+
+            return Ok(isCreatorView);
+        }
+
+        // GET api/household/getall_debug
+        [HttpGet]
+        [Route("getall_debug")]
         public IHttpActionResult GetAll()
         {
             var households = DbContext.Households.ToList();
             if (households is null)
                 return NotFound();
 
-            var householdsView = households.Select(p => HouseholdHelpers.MapHouseholdToView(p));
+            var userId = User.Identity.GetUserId();
+
+            var householdsView = households.Select(p => HouseholdHelpers.MapHouseholdToView(p, userId));
 
             return Ok(householdsView);
         }
@@ -280,7 +340,9 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             if (household is null)
                 return NotFound();
 
-            var householdView = HouseholdHelpers.MapHouseholdToView(household);
+            var userId = User.Identity.GetUserId();
+
+            var householdView = HouseholdHelpers.MapHouseholdToView(household, userId);
 
             return Ok(householdView);
         }
