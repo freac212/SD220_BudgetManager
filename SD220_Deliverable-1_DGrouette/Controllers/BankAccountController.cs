@@ -139,6 +139,26 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             return OkView(bankAccount);
         }
 
+        // >Getting the bank accounts by the household Id, user must be a member of the household
+        // GET api/category/getallbyhousehold
+        [HttpGet]
+        [Route("getallbyhousehold/{id:int}")]
+        [UserAuthorization(IdType = typeof(HouseholdHouseMember))]
+        public IHttpActionResult GetAllByHousehold(int? Id)
+        {
+            var userId = User.Identity.GetUserId();
+            if (userId is null)
+                return Unauthorized();
+
+            var bankAccounts = DbContext.Households.FirstOrDefault(p => p.Id == Id).BankAccounts.ToList();
+            if (bankAccounts is null)
+                return BadRequest("No Accounts for this household");
+
+            var viewModels = bankAccounts.Select(p => BankAccountHelpers.MapBankAccountToView(p));
+
+            return Ok(viewModels);
+        }
+
         // === Extras for debugging. ===
         // GET api/bankaccount/getbyid/2
         [HttpGet]

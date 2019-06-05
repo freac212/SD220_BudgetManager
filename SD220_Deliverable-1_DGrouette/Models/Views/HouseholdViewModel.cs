@@ -17,5 +17,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Views
         public bool IsMember { get; set; }
         public List<HouseholdUserViewModel> HouseholdUsers { get; set; }
         public List<CategoryViewModel> Categories { get; set; }
+        public List<BankAccountViewModel> BankAccounts { get; set; }
+        public List<TransactionViewModel> Transactions { get; set; }
     }
 }

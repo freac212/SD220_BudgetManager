@@ -1,4 +1,5 @@
-﻿using SD220_Deliverable_1_DGrouette.Models.Domain;
+﻿using Microsoft.AspNet.Identity;
+using SD220_Deliverable_1_DGrouette.Models.Domain;
 using SD220_Deliverable_1_DGrouette.Models.Views;
 using System;
 using System.Collections.Generic;
@@ -35,8 +36,35 @@ namespace SD220_Deliverable_1_DGrouette.Models.Helpers
                     Id = p.Id,
                     Name = p.Name,
                     HouseholdId = p.HouseholdId
+                }).ToList(),
+                BankAccounts = household.BankAccounts.Select(p => new BankAccountViewModel()
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Balance = p.Balance,
+                    DateCreated = p.DateCreated,
+                    DateUpdated = p.DateUpdated,
+                    HouseholdId = p.HouseholdId
+                }).ToList(),
+                Transactions = household.BankAccounts
+                .SelectMany(p => p.Transactions)
+                .Select(p => new TransactionViewModel()
+                {
+                    Id = p.Id,
+                    Title = p.Title,
+                    Description = p.Description,
+                    DateCreated = p.DateCreated,
+                    DateUpdated = p.DateUpdated,
+                    Date = p.Date,
+                    Amount = p.Amount,
+                    IsVoid = p.IsVoid,
+                    CategoryId = p.CategoryId,
+                    CreatorId = p.CreatorId,
+                    BankAccountId = p.BankAccountId
                 }).ToList()
-             };
+             
+            };
         }
 
         public static InviteViewModel MapInviteToView(Domain.Household household)
@@ -49,7 +77,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Helpers
             };
         }
 
-        internal static object MapCategoryToView(Category category)
+        public static object MapCategoryToView(Category category)
         {
             return new CategoryViewModel()
             {
@@ -62,7 +90,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Helpers
             };
         }
 
-        internal enum ListTypes
+        public enum ListTypes
         {
             HouseHolds,
             Transactions,

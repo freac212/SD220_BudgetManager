@@ -119,6 +119,26 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             return Ok(categoriesView);
         }
 
+        // >Getting the categories by the household Id, user must be a member of the household
+        // GET api/category/getallbyhousehold
+        [HttpGet]
+        [Route("getallbyhousehold/{id:int}")]
+        [UserAuthorization(IdType = typeof(HouseholdHouseMember))]
+        public IHttpActionResult GetAll(int? Id)
+        {
+            var userId = User.Identity.GetUserId();
+            if (userId is null)
+                return Unauthorized();
+
+            var categories = DbContext.Households.FirstOrDefault(p => p.Id == Id).Categories.ToList();
+            if (categories is null)
+                return BadRequest("No Categories for this household");
+
+            var categoriesView = categories.Select(p => HouseholdHelpers.MapCategoryToView(p));
+
+            return Ok(categoriesView);
+        }
+
         // === Extras for debugging. ===
         // GET api/category/getbyId/2
         [HttpGet]

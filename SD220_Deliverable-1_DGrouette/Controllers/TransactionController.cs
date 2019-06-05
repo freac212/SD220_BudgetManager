@@ -33,12 +33,12 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             if (ModelState is null || !ModelState.IsValid || Id is null)
                 return BadRequest(ModelState);
 
-            if (!DbContext.Categories.Any(p => p.Id == transactionBinding.CategoryId))
-                return BadRequest("No category with that Id");
-
             var bankAccount = DbContext.BankAccounts.FirstOrDefault(p => p.Id == Id);
             if (bankAccount is null)
                 return NotFound();
+
+            if (!bankAccount.Household.Categories.Any(p => p.Id == transactionBinding.CategoryId))
+                return BadRequest("No category with that Id");
 
             var transaction = new Transaction
             {
@@ -100,12 +100,16 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             if (ModelState is null || !ModelState.IsValid) // ++Q : Turn into filter.
                 return BadRequest(ModelState);
 
-            if (!DbContext.Categories.Any(p => p.Id == bindingModel.CategoryId))
-                return BadRequest("No category with that Id");
-
             var transaction = DbContext.Transactions.FirstOrDefault(p => p.Id == Id);
             if (transaction is null)
-                return NotFound();
+                return BadRequest("No transaction with that Id");
+
+            var bankAccount = DbContext.BankAccounts.FirstOrDefault(p => p.Id == Id);
+            if (bankAccount is null)
+                return BadRequest("No bankAccount with that Id");
+
+            if (!bankAccount.Household.Categories.Any(p => p.Id == bindingModel.CategoryId))
+                return BadRequest("No category with that Id");
 
             if (!transaction.IsVoid)
             {
