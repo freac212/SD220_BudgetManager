@@ -156,5 +156,20 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
 
             return Ok(categoryView);
         }
+
+        // GET api/category/getName/2
+        [HttpGet]
+        [Route("getName/{id:int}")]
+        public IHttpActionResult GetName(int? Id)
+        {
+            if (Id is null)
+                return BadRequest("Id is invalid");
+
+            var categoryName = DbContext.Categories.FirstOrDefault(p => p.Id == Id).Name;
+            if (categoryName is null)
+                return NotFound();
+
+            return Ok(categoryName);
+        }
     }
 }

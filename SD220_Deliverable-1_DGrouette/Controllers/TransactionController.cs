@@ -35,8 +35,9 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
 
             var bankAccount = DbContext.BankAccounts.FirstOrDefault(p => p.Id == Id);
             if (bankAccount is null)
-                return NotFound();
+                return BadRequest("No bank account with that Id");
 
+            // Ensure that the bank account and category are in the same houeshold.
             if (!bankAccount.Household.Categories.Any(p => p.Id == transactionBinding.CategoryId))
                 return BadRequest("No category with that Id");
 
@@ -172,7 +173,27 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             return OkView(transactions);
         }
 
-        // === Extras for debugging. ===
+        // === Extras for debugging/ front end. ===
+        // >Getting the transactions by the household Id, user must be a member of the household
+        // GET api/transaction/getallbyhousehold
+        [HttpGet]
+        [Route("getallbyhousehold/{id:int}")]
+        [UserAuthorization(IdType = typeof(HouseholdHouseMember))]
+        public IHttpActionResult GetAllByHousehold(int? Id)
+        {
+            var userId = User.Identity.GetUserId();
+            if (userId is null)
+                return Unauthorized();
+
+            var transactions = DbContext.Households.FirstOrDefault(p => p.Id == Id).BankAccounts.SelectMany(p => p.Transactions).ToList();
+            if (transactions is null)
+                return BadRequest("No Transactions for this household");
+
+            var transactionsView = transactions.Select(p => TransactionHelpers.MapToView(p));
+
+            return Ok(transactionsView);
+        }
+
         // GET api/transaction/getbyid/2
         [HttpGet]
         [Route("getbyid/{id:int}", Name = "GetTransactionById")]
@@ -198,6 +219,21 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         {
             var transactionViews = transactions.Select(p => TransactionHelpers.MapToView(p));
             return Ok(transactionViews);
+        }
+
+        // GET api/transaction/getTitle/2
+        [HttpGet]
+        [Route("getTitle/{id:int}")]
+        public IHttpActionResult GetTitle(int? Id)
+        {
+            if (Id is null)
+                return BadRequest("Id is invalid");
+
+            var transactionTitle = DbContext.Transactions.FirstOrDefault(p => p.Id == Id).Title;
+            if (transactionTitle is null)
+                return NotFound();
+
+            return Ok(transactionTitle);
         }
     }
 }

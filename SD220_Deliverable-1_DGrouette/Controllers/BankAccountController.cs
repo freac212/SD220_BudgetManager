@@ -176,6 +176,21 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             return OkView(bankAccount);
         }
 
+        // GET api/bankaccount/getName/2
+        [HttpGet]
+        [Route("getName/{id:int}")]
+        public IHttpActionResult GetName(int? Id)
+        {
+            if (Id is null)
+                return BadRequest("Id is invalid");
+
+            var bankaccountName = DbContext.BankAccounts.FirstOrDefault(p => p.Id == Id).Name;
+            if (bankaccountName is null)
+                return NotFound();
+
+            return Ok(bankaccountName);
+        }
+
         private IHttpActionResult OkView(BankAccount bankAccount)
         {
             var bankAccountView = BankAccountHelpers.MapBankAccountToView(bankAccount);
