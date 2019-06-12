@@ -77,7 +77,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Helpers
             };
         }
 
-        public static object MapCategoryToView(Category category)
+        public static CategoryViewModel MapCategoryToView(Category category)
         {
             return new CategoryViewModel()
             {

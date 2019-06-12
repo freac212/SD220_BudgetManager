@@ -33,6 +33,11 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             if (ModelState is null || !ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            if (DbContext.Households.FirstOrDefault(p => p.Id == Id).Categories.Any(p => p.Name == categoryBinding.Name))
+            {
+                return BadRequest("That name is already in use, please choose another.");
+            }
+
             var household = DbContext.Households.FirstOrDefault(p => p.Id == Id);
             if (household is null)
                 return NotFound();
@@ -87,16 +92,24 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         [UserAuthorization(IdType = typeof(CategoryCreator))]
         public IHttpActionResult Delete(int? Id)
         {
-            var removedCategory = DbContext.Categories.Remove(DbContext.Categories.FirstOrDefault(p => p.Id == Id));
+            var categoryCheck = DbContext.Categories.Where(p => p.Id == Id && !p.Transactions.Any()).FirstOrDefault();
 
-            if (removedCategory != null)
+            if(categoryCheck != null)
             {
-                DbContext.SaveChanges();
-                return Ok();
-            }
-            else
+                var removeCategory = DbContext.Categories.Remove(categoryCheck);
+
+                if(removeCategory != null)
+                {
+                    DbContext.SaveChanges();
+                    return Ok();
+                } else
+                {
+                    return InternalServerError();
+                }
+
+            } else
             {
-                return InternalServerError();
+                return BadRequest("Cannot delete a category while it contains transactions.");
             }
         }
 
