@@ -311,6 +311,28 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             return Ok(isCreatorView);
         }
 
+        // GET api/household/isusercreator
+        [HttpGet]
+        [Route("isusercreatorormember/{id:int}")]
+        public IHttpActionResult IsUserCreatorOrMember(int? Id)
+        {
+            if (Id is null)
+                return BadRequest("Id is invalid.");
+
+            var userId = User.Identity.GetUserId();
+
+            var household = DbContext.Households.FirstOrDefault(p => p.Id == Id);
+            if (household is null)
+                return NotFound();
+
+            var isCreatorView = new IsCreatorOrMemberViewModel()
+            {
+                IsCreatorOrMember = household.CreatorId == userId || household.Members.Any(p => p.Id == userId)
+            };
+
+            return Ok(isCreatorView);
+        }
+
         // GET api/household/getall_debug
         [HttpGet]
         [Route("getall_debug")]

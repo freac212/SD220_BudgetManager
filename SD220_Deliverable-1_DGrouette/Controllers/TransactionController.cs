@@ -5,6 +5,7 @@ using SD220_Deliverable_1_DGrouette.Models.Bindings;
 using SD220_Deliverable_1_DGrouette.Models.Domain;
 using SD220_Deliverable_1_DGrouette.Models.Filters;
 using SD220_Deliverable_1_DGrouette.Models.Helpers;
+using SD220_Deliverable_1_DGrouette.Models.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -103,19 +104,15 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
 
             var transaction = DbContext.Transactions.FirstOrDefault(p => p.Id == Id);
             if (transaction is null)
-                return BadRequest("No transaction with that Id");
+                return BadRequest("No Transaction with that Id");
 
-            var bankAccount = DbContext.BankAccounts.FirstOrDefault(p => p.Id == Id);
-            if (bankAccount is null)
-                return BadRequest("No bankAccount with that Id");
-
-            if (!bankAccount.Household.Categories.Any(p => p.Id == bindingModel.CategoryId))
-                return BadRequest("No category with that Id");
+            if (!transaction.BankAccount.Household.Categories.Any(p => p.Id == bindingModel.CategoryId))
+                return BadRequest("No Category with that Id");
 
             if (!transaction.IsVoid)
             {
-                transaction.BankAccount.Balance -= transaction.Amount; // Removing the old transaction amount
-                transaction.BankAccount.Balance += bindingModel.Amount; // Adding the new amounts
+                transaction.BankAccount.Balance -= transaction.Amount; // Removing the old transaction amount from the old bank account
+                transaction.BankAccount.Balance += bindingModel.Amount; // Adding the new amounts to the new account
             }
 
             transaction.Title = bindingModel.Title;
@@ -197,6 +194,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // GET api/transaction/getbyid/2
         [HttpGet]
         [Route("getbyid/{id:int}", Name = "GetTransactionById")]
+        [UserAuthorization(IdType = typeof(TransactionHouseMember))]
         public IHttpActionResult GetById(int? Id)
         {
             if (Id is null)
@@ -209,21 +207,10 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
             return OkView(transaction);
         }
 
-        private IHttpActionResult OkView(Transaction transaction)
-        {
-            var transactionView = TransactionHelpers.MapToView(transaction);
-            return Ok(transactionView);
-        }
-
-        private IHttpActionResult OkView(List<Transaction> transactions)
-        {
-            var transactionViews = transactions.Select(p => TransactionHelpers.MapToView(p));
-            return Ok(transactionViews);
-        }
-
         // GET api/transaction/getTitle/2
         [HttpGet]
         [Route("getTitle/{id:int}")]
+        [UserAuthorization(IdType = typeof(TransactionHouseMember))]
         public IHttpActionResult GetTitle(int? Id)
         {
             if (Id is null)
@@ -234,6 +221,46 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
                 return NotFound();
 
             return Ok(transactionTitle);
+        }
+
+        // GET api/transaction/isusercreator
+        [HttpGet]
+        [Route("isusercreator/{id:int}")]
+        [UserAuthorization(IdType = typeof(TransactionHouseMember))]
+        public IHttpActionResult IsUserCreator(int? Id)
+        {
+            // refering to creator of household or creator of transaction. 
+            // If the user is either of them, return true, as they can manipulate the transaction.
+
+            // Doesn't matter if the transaction is on another household, as long as the user has the rights.
+
+            if (Id is null)
+                return BadRequest("Id is invalid.");
+
+            var userId = User.Identity.GetUserId();
+
+            var transaction = DbContext.Transactions.FirstOrDefault(p => p.Id == Id);
+            if (transaction is null)
+                return NotFound();
+
+            var isCreatorView = new IsCreatorViewModel()
+            {
+                IsCreator = transaction.CreatorId == userId || transaction.BankAccount.Household.CreatorId == userId
+            };
+
+            return Ok(isCreatorView);
+        }
+
+        private IHttpActionResult OkView(Transaction transaction)
+        {
+            var transactionView = TransactionHelpers.MapToView(transaction);
+            return Ok(transactionView);
+        }
+
+        private IHttpActionResult OkView(List<Transaction> transactions)
+        {
+            var transactionViews = transactions.Select(p => TransactionHelpers.MapToView(p));
+            return Ok(transactionViews);
         }
     }
 }

@@ -239,6 +239,7 @@
     <Compile Include="Models\Helpers\TransactionHelpers.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Views\InviteViewModel.cs" />
+    <Compile Include="Models\Views\IsCreatorOrMemberViewModel.cs" />
     <Compile Include="Models\Views\IsCreatorViewModel.cs" />
     <Compile Include="Models\Views\TransactionViewModel.cs" />
     <Compile Include="Models\Views\BankAccountViewModel.cs" />

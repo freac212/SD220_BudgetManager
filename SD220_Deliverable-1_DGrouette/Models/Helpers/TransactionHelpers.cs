@@ -25,7 +25,8 @@ namespace SD220_Deliverable_1_DGrouette.Models.Helpers
                 IsVoid = transaction.IsVoid,
                 CategoryId = transaction.CategoryId,
                 CreatorId = transaction.CreatorId,
-                BankAccountId = transaction.BankAccountId
+                BankAccountId = transaction.BankAccountId,
+                HouseholdId = transaction.BankAccount.HouseholdId
             };
         }
     }

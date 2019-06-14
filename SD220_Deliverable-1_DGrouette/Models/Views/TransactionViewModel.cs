@@ -18,5 +18,6 @@ namespace SD220_Deliverable_1_DGrouette.Models.Views
         public int CategoryId { get; set; }
         public string CreatorId { get; set; }
         public int BankAccountId { get; set; }
+        public int HouseholdId { get; set; }
     }
 }

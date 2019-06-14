@@ -179,6 +179,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // GET api/bankaccount/getName/2
         [HttpGet]
         [Route("getName/{id:int}")]
+        [UserAuthorization(IdType = typeof(BankAccountHouseMember))]
         public IHttpActionResult GetName(int? Id)
         {
             if (Id is null)

@@ -156,6 +156,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // GET api/category/getbyId/2
         [HttpGet]
         [Route("getbyId/{id:int}", Name = "GetCategoryById")]
+        [UserAuthorization(IdType = typeof(CategoryHouseMember))]
         public IHttpActionResult GetById(int? Id)
         {
             if (Id is null)
@@ -173,6 +174,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         // GET api/category/getName/2
         [HttpGet]
         [Route("getName/{id:int}")]
+        [UserAuthorization(IdType = typeof(CategoryHouseMember))]
         public IHttpActionResult GetName(int? Id)
         {
             if (Id is null)

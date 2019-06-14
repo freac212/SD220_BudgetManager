@@ -24,8 +24,9 @@ namespace SD220_Deliverable_1_DGrouette.Models.Filters
 
         public bool Execute(int id, string userId)
         {
-            return _ = DbContext.Transactions.Any(p => p.Id == id && p.CreatorId == userId 
-            || p.BankAccount.Household.CreatorId == userId) ? true : false;
+            // Creator of transaction or is owner of household
+            return DbContext.Transactions.Any(p => p.Id == id &&
+            (p.CreatorId == userId || p.BankAccount.Household.CreatorId == userId));
         }
     }
 
@@ -35,7 +36,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Filters
 
         public bool Execute(int id, string userId)
         {
-            return _ = DbContext.Households.Any(p => p.Id == id && p.CreatorId == userId) ? true : false;
+            return DbContext.Households.Any(p => p.Id == id && p.CreatorId == userId);
         }
     }
 
@@ -45,7 +46,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Filters
 
         public bool Execute(int id, string userId)
         {
-           return _ = DbContext.Categories.Any(p => p.Id == id && p.Household.CreatorId == userId) ? true : false;
+           return DbContext.Categories.Any(p => p.Id == id && p.Household.CreatorId == userId);
         }
     }
 
@@ -55,7 +56,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Filters
 
         public bool Execute(int id, string userId)
         {
-            return _ = DbContext.BankAccounts.Any(p => p.Id == id && p.Household.CreatorId == userId) ? true : false;
+            return DbContext.BankAccounts.Any(p => p.Id == id && p.Household.CreatorId == userId);
         }
     }
 
@@ -65,7 +66,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Filters
 
         public bool Execute(int id, string userId)
         {
-            return _ = DbContext.Transactions.Where(p => p.Id == id).Any(p => p.BankAccount.Household.Members.Any(i => i.Id == userId)) ? true : false;
+            return DbContext.Transactions.Where(p => p.Id == id).Any(p => p.BankAccount.Household.Members.Any(i => i.Id == userId));
         }
     }
 
@@ -75,7 +76,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Filters
 
         public bool Execute(int id, string userId)
         {
-            return _ = DbContext.Households.Any(p => p.Id == id && p.Members.Any(i => i.Id == userId)) ? true : false;
+            return DbContext.Households.Any(p => p.Id == id && p.Members.Any(user => user.Id == userId));
         }
     }
 
@@ -85,7 +86,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Filters
 
         public bool Execute(int id, string userId)
         {
-            return _ = DbContext.Categories.Where(p => p.Id == id).Any(p => p.Household.Members.Any(i => i.Id == userId)) ? true : false;
+            return DbContext.Categories.Where(p => p.Id == id).Any(p => p.Household.Members.Any(i => i.Id == userId));
         }
     }
 
@@ -95,7 +96,7 @@ namespace SD220_Deliverable_1_DGrouette.Models.Filters
 
         public bool Execute(int id, string userId)
         {
-            return _ = DbContext.BankAccounts.Where(p => p.Id == id).Any(p => p.Household.Members.Any(i => i.Id == userId)) ? true : false;
+            return DbContext.BankAccounts.Where(p => p.Id == id).Any(p => p.Household.Members.Any(i => i.Id == userId));
         }
     }
 
