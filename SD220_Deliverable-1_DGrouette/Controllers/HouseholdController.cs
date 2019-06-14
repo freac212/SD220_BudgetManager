@@ -98,6 +98,8 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         [UserAuthorization(IdType = typeof(HouseholdCreator))]
         public IHttpActionResult Invite(int? Id, InviteHouseholdBindingModel bindingModel)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             // Invited user must be registered in the app
             // api takes an email and sends a link to that email.
             // the link allows the user to add themselves to the household, but only if they're invited! (on the invite list)

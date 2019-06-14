@@ -69,7 +69,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         [UserAuthorization(IdType = typeof(CategoryCreator))]
         public IHttpActionResult Edit(int? Id, CategoryBindingModel categoryBinding)
         {
-            if (ModelState is null || !ModelState.IsValid) // ++Q : Turn into filter.
+            if (ModelState is null || !ModelState.IsValid)
                 return BadRequest(ModelState);
 
             var category = DbContext.Categories.FirstOrDefault(p => p.Id == Id);

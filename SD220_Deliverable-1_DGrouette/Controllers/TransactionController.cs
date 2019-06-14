@@ -99,7 +99,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         [UserAuthorization(IdType = typeof(TransactionCreator))]
         public IHttpActionResult Edit(int? Id, TransactionBindingModel bindingModel)
         {
-            if (ModelState is null || !ModelState.IsValid) // ++Q : Turn into filter.
+            if (ModelState is null || !ModelState.IsValid)
                 return BadRequest(ModelState);
 
             var transaction = DbContext.Transactions.FirstOrDefault(p => p.Id == Id);

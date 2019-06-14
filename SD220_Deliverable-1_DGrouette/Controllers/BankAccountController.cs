@@ -65,7 +65,7 @@ namespace SD220_Deliverable_1_DGrouette.Controllers
         [UserAuthorization(IdType = typeof(BankAccountCreator))] // only the owner of the household can edit the bank accounts
         public IHttpActionResult Edit(int? Id, BankAccountBindingModel bindingModel)
         {
-            if (ModelState is null || !ModelState.IsValid) // ++Q : Turn into filter.
+            if (ModelState is null || !ModelState.IsValid)
                 return BadRequest(ModelState);
 
             var bankAccount = DbContext.BankAccounts.FirstOrDefault(p => p.Id == Id);
